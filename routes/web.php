@@ -20,6 +20,8 @@ use App\Http\Controllers\front\HomeFc;
 use App\Http\Controllers\front\InquiryController;
 use App\Http\Controllers\front\SolutionFc;
 use App\Models\Blog;
+use App\Models\ProductCategory;
+use App\Models\ProductSubCategory;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -97,7 +99,16 @@ Route::get('/about-us', [AboutFc::class, 'index']);
 Route::get('/contact-us', [ContactFc::class, 'index']);
 Route::get('/thank-you', [ContactFc::class, 'thankYou']);
 Route::get('/career', [CareerFc::class, 'index']);
+
 Route::get('/solutions', [SolutionFc::class, 'index']);
+$cat = ProductCategory::all();
+foreach ($cat as $row) {
+  Route::get('/' . $row->category_slug, [SolutionFc::class, 'catDetail']);
+}
+$subcat = ProductSubCategory::all();
+foreach ($subcat as $row) {
+  Route::get('/' . $row->sub_category_slug, [SolutionFc::class, 'subDetail']);
+}
 
 Route::get('/news', [BlogFc::class, 'index']);
 Route::get('/news/{slug}', [BlogFc::class, 'blogByCategory']);

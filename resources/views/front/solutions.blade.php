@@ -61,89 +61,41 @@
         </div>
       </div>
 
-      <div class="row align-items-center pb-100">
-        <div class="col-lg-7">
-          <h2 class="faq__title">Prosthetics</h2>
-          <p class="mb-3 text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-            took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-            centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
-            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-            recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-          <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-            but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-            desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-          <div class="btn-common-wrap">
-            <a href="prosthetics.html" class="blog__btn mt-4">Explore Now <span><i
-                  class="fa-solid fa-arrow-right"></i></span></a>
+      @php
+        $i = 1;
+      @endphp
+      @foreach ($productCategories as $row)
+        @php
+          $num = checkOddOrEven($i);
+        @endphp
+        <div class="row align-items-center pb-100">
+          @if ($num == 'even')
+            <div class="col-lg-5">
+              <div class="faq__img"><img src="{{ asset($row->thumbnail_path) }}" alt="{{ $row->category_name }}"
+                  data-speed="auto">
+              </div>
+            </div>
+          @endif
+          <div class="col-lg-7">
+            <h2 class="faq__title">{{ $row->category_name }}</h2>
+            {!! $row->description !!}
+            <div class="btn-common-wrap">
+              <a href="{{ url($row->category_slug) }}" class="blog__btn mt-4">Explore Now <span><i
+                    class="fa-solid fa-arrow-right"></i></span></a>
+            </div>
           </div>
+          @if ($num == 'odd')
+            <div class="col-lg-5">
+              <div class="faq__img"><img src="{{ asset($row->thumbnail_path) }}" alt="{{ $row->category_name }}"
+                  data-speed="auto">
+              </div>
+            </div>
+          @endif
         </div>
-        <div class="col-lg-5">
-          <div class="faq__img"><img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image"
-              data-speed="auto">
-          </div>
-        </div>
-      </div>
-
-      <div class="row align-items-center pb-100">
-        <div class="col-lg-5">
-          <div class="faq__img"><img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image"
-              data-speed="auto">
-          </div>
-        </div>
-        <div class="col-lg-7">
-          <h2 class="faq__title">Orthetics</h2>
-          <p class="mb-3 text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-            took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-            centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
-            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-            recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-          <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-            but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-            desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-          <div class="btn-common-wrap">
-            <a href="prosthetics.html" class="blog__btn mt-4">Explore Now <span><i
-                  class="fa-solid fa-arrow-right"></i></span></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="row align-items-center pb-100">
-        <div class="col-lg-7">
-          <h2 class="faq__title">Rehab Products</h2>
-          <p class="mb-3 text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-            took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-            centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
-            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-            recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-          <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-            Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-            but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
-            the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with
-            desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-          <div class="btn-common-wrap">
-            <a href="prosthetics.html" class="blog__btn mt-4">Explore Now <span><i
-                  class="fa-solid fa-arrow-right"></i></span></a>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="faq__img"><img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image"
-              data-speed="auto">
-          </div>
-        </div>
-      </div>
+        @php
+          $i++;
+        @endphp
+      @endforeach
 
     </div>
   </section>

@@ -1,6 +1,6 @@
 @extends('front.layouts.main')
 @push('seo_meta_tag')
-  @include('front.layouts.static_page_meta_tag')
+  @include('front.layouts.dynamic_page_meta_tag')
 @endpush
 @section('main-section')
   <!-- Breadcrumb area start -->
@@ -9,8 +9,9 @@
       <ul class="woocomerce__single-breadcrumb">
         <li><a href="{{ url('/') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
         <li><a href="{{ url('solutions') }}">Solutions <i class="fa-solid fa-chevron-right"></i></a></li>
-        <li><a href="prosthetics.html">Prosthetic <i class="fa-solid fa-chevron-right"></i></a></li>
-        <li>Lower Limb Prosthetics</li>
+        <li><a href="{{ url($row->getCategory->category_slug) }}">{{ $row->getCategory->category_name }} <i
+              class="fa-solid fa-chevron-right"></i></a></li>
+        <li>{{ $row->sub_category_name }}</li>
       </ul>
     </div>
   </div>
@@ -23,13 +24,12 @@
       <div class="row">
         <div class="col-lg-6 col-md-6">
           <div class="sec-title-wrapper text-start">
-            <h2 class="sec-title">Lower Limb Prosthetics</h2>
+            <h2 class="sec-title">{{ $row->sub_category_name }}</h2>
           </div>
         </div>
         <div class="col-lg-6 col-md-6">
           <div class="feature__text text-justify">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-              industry's standard dummy text.</p>
+            {{ $row->shortnote }}
           </div>
         </div>
       </div>
@@ -41,22 +41,10 @@
     <div class="container g-0 pt-100 pb-100">
       <div class="row align-items-center">
         <div class="col-lg-7">
-          <h2 class="faq__title">Lorem Ipsum is simply dummy text</h2>
-          <p class="mb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-            of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-            the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-            publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-          <p class="mb-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-            of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-            the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-            publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          {!! $row->description !!}
         </div>
         <div class="col-lg-5">
-          <div class="faq__img"><img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image"
+          <div class="faq__img"><img src="{{ asset($row->thumbnail_path) }}" alt="{{ $row->sub_category_name }}"
               data-speed="auto">
           </div>
         </div>
@@ -70,7 +58,7 @@
       <div class="row pb-5">
         <div class="col-lg-12">
           <div class="sec-title-wrapper">
-            <h3 class="sec-title">Types of Lower Limb Prosthetics - 1</h3>
+            <h3 class="sec-title">Types of {{ $row->sub_category_name }} - 1</h3>
           </div>
           <p class="mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
             has been the industry's standard dummy text.</p>
@@ -80,65 +68,17 @@
       <div class="row">
         <div class="portfolio__inner-5">
 
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
+          @foreach ($row->getAllProduct as $pd)
+            <div class="portfolio__item-5">
+              <img src="{{ asset($pd->thumbnail_path) }}" alt="{{ $pd->product_name }}">
+              <div class="portfolio__content-5">
+                {{-- <h2 class="portfolio__name-5">Hand prosthetics</h2> --}}
+                <h3 class="portfolio__title-5 mb-2">{{ $pd->product_name }}</h3>
+                <a href="{{ url($pd->product_slug) }}" class="blog__btn">View Product Details <span><i
+                      class="fa-solid fa-arrow-right"></i></span></a>
+              </div>
             </div>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/2.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/2.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/2.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-          </div>
+          @endforeach
 
         </div>
       </div>
