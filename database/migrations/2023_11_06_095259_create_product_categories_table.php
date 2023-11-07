@@ -19,6 +19,11 @@ return new class extends Migration
       $table->text('thumbnail_path')->nullable();
       $table->text('shortnote')->nullable();
       $table->longText('description')->nullable();
+      $table->text('meta_title')->nullable();
+      $table->text('meta_keyword')->nullable();
+      $table->longText('meta_description')->nullable();
+      $table->text('page_content')->nullable();
+      $table->integer('seo_rating')->nullable();
       $table->timestamps();
     });
   }

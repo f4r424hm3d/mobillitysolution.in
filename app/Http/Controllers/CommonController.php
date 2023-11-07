@@ -33,4 +33,14 @@ class CommonController extends Controller
   {
     echo $result = DB::table($request->tbl)->whereIn('id', $request->ids)->update([$request->col => $request->val]);
   }
+  public function getSubCategoryByCategory(Request $request)
+  {
+    //echo $id;
+    $field = DB::table('product_sub_categories')->where('category_id', $request['category_id'])->get();
+    $output = '<option value="">Select Sub Category</option>';
+    foreach ($field as $row) {
+      $output .= '<option value="' . $row->id . '">' . $row->sub_category_name . '</option>';
+    }
+    echo $output;
+  }
 }

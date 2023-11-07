@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -15,7 +16,7 @@ class BlogC extends Controller
   {
     $page_no = $_GET['page'] ?? 1;
     $blog_categories = BlogCategory::all();
-    $authors = Author::all();
+    $authors = User::all();
     $rows = Blog::get();
     if ($id != null) {
       $sd = Blog::find($id);
@@ -52,6 +53,7 @@ class BlogC extends Controller
         <th>Shortnote</th>
         <th>Description</th>
         <th>Thumnbnail</th>
+        <th>Image</th>
         <th>SEO</th>
         <th>Action</th>
       </tr>
@@ -62,7 +64,7 @@ class BlogC extends Controller
       <td>' . $i . '</td>
       <td>' . $row->title . '</td>
       <td>' . $row->getCategory->category_name . '</td>
-      <td>' . $row->getAuthor->author_name . '</td>
+      <td>' . $row->getAuthor->name . '</td>
       <td>';
       if ($row->shortnote != null) {
         $output .= '<button type="button" class="btn btn-xs btn-outline-info waves-effect waves-light"
@@ -116,15 +118,19 @@ class BlogC extends Controller
       } else {
         $output .= 'Null';
       }
-      $output .= '</td>
-      <td>';
+      $output .= '</td><td>';
       if ($row->thumbnail_path != null) {
-        $output .= '<img src="' . asset($row->thumbnail_path) . '" alt="" height="80" width="80">';
+        $output .= '<img src="' . asset($row->thumbnail_path) . '" alt="" height="40" width="40">';
       } else {
         $output .= 'N/A';
       }
-      $output .= '</td>
-      <td>';
+      $output .= '</td><td>';
+      if ($row->image_path != null) {
+        $output .= '<img src="' . asset($row->image_path) . '" alt="" height="40" width="40">';
+      } else {
+        $output .= 'N/A';
+      }
+      $output .= '</td><td>';
       if ($row->meta_title != null) {
         $output .= '<button type="button" class="btn btn-xs btn-outline-info waves-effect waves-light"
                       data-bs-toggle="modal" data-bs-target="#SeoModalScrollable' . $row->id . '">View</button>
@@ -154,18 +160,12 @@ class BlogC extends Controller
       } else {
         $output .= 'Null';
       }
-      $output .= '</td>
-      <td>
+      $output .= '</td><td>
         <a href="javascript:void()" onclick="DeleteAjax(' . $row->id . ')"
           class="waves-effect waves-light btn btn-xs btn-outline btn-danger">
           <i class="fa fa-trash" aria-hidden="true"></i>
         </a>
-        <a href="' . url("admin/blogs/update/" . $row->id) . '"
-                      class="waves-effect waves-light btn btn-xs btn-outline btn-info">
-                      <i class="fa fa-edit" aria-hidden="true"></i>
-                    </a>
-      </td>
-    </tr>';
+        <a href="' . url("admin/blogs/update/" . $row->id) . '" class="waves-effect waves-light btn btn-xs btn-outline btn-info"><i class="fa fa-edit" aria-hidden="true"></i></a></td></tr>';
       $i++;
     }
     $output .= '</tbody></table>';
@@ -174,22 +174,15 @@ class BlogC extends Controller
   }
   public function storeAjax(Request $request)
   {
-    // $validator = $request->validate(
-    //   [
-    //     'title' => 'required|unique:blogs,title',
-    //     'thumbnail' => 'nullable|max:5000|mimes:jpg,jpeg,png,gif',
-    //   ]
-    // );
-
     $validator = Validator::make($request->all(), [
       'title' => 'required|unique:blogs,title',
       'category_id' => 'required',
       'author_id' => 'required',
       'thumbnail' => 'nullable|max:5000|mimes:jpg,jpeg,png,gif',
+      'image_name' => 'nullable|max:5000|mimes:jpg,jpeg,png,gif',
     ]);
 
     if ($validator->fails()) {
-
       return response()->json([
         'error' => $validator->errors(),
       ]);
@@ -201,11 +194,23 @@ class BlogC extends Controller
       $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
       $file_name_slug = slugify($fileNameWithoutExtention);
       $fileExtention = $request->file('thumbnail')->getClientOriginalExtension();
-      $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
+      $file_name = $file_name_slug . '_t_' . time() . '.' . $fileExtention;
       $move = $request->file('thumbnail')->move('uploads/blogs/', $file_name);
       if ($move) {
         $field->thumbnail_name = $file_name;
         $field->thumbnail_path = 'uploads/blogs/' . $file_name;
+      }
+    }
+    if ($request->hasFile('image_name')) {
+      $fileOriginalName = $request->file('image_name')->getClientOriginalName();
+      $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
+      $file_name_slug = slugify($fileNameWithoutExtention);
+      $fileExtention = $request->file('image_name')->getClientOriginalExtension();
+      $file_name = $file_name_slug . '_i_' . time() . '.' . $fileExtention;
+      $move = $request->file('image_name')->move('uploads/blogs/', $file_name);
+      if ($move) {
+        $field->image_name = $file_name;
+        $field->image_path = 'uploads/blogs/' . $file_name;
       }
     }
     $field->title = $request['title'];
@@ -224,8 +229,16 @@ class BlogC extends Controller
   }
   public function delete($id)
   {
-    //echo $id;
-    echo $result = Blog::find($id)->delete();
+    if ($id) {
+      $row = Blog::findOrFail($id);
+      if ($row->thumbnail_path != null) {
+        unlink($row->thumbnail_path);
+      }
+      if ($row->image_path != null) {
+        unlink($row->image_path);
+      }
+      echo $result = $row->delete();
+    }
   }
   public function update($id, Request $request)
   {
@@ -235,6 +248,7 @@ class BlogC extends Controller
         'category_id' => 'required',
         'author_id' => 'required',
         'thumbnail' => 'nullable|max:5000|mimes:jpg,jpeg,png,gif',
+        'image_name' => 'nullable|max:5000|mimes:jpg,jpeg,png,gif',
       ]
     );
     $field = Blog::find($id);
@@ -243,11 +257,29 @@ class BlogC extends Controller
       $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
       $file_name_slug = slugify($fileNameWithoutExtention);
       $fileExtention = $request->file('thumbnail')->getClientOriginalExtension();
-      $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
+      $file_name = $file_name_slug . '_t_' . time() . '.' . $fileExtention;
       $move = $request->file('thumbnail')->move('uploads/blogs/', $file_name);
       if ($move) {
+        if ($field->thumbnail_path != null) {
+          unlink($field->thumbnail_path);
+        }
         $field->thumbnail_name = $file_name;
         $field->thumbnail_path = 'uploads/blogs/' . $file_name;
+      }
+    }
+    if ($request->hasFile('image_name')) {
+      $fileOriginalName = $request->file('image_name')->getClientOriginalName();
+      $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
+      $file_name_slug = slugify($fileNameWithoutExtention);
+      $fileExtention = $request->file('image_name')->getClientOriginalExtension();
+      $file_name = $file_name_slug . '_i_' . time() . '.' . $fileExtention;
+      $move = $request->file('image_name')->move('uploads/blogs/', $file_name);
+      if ($move) {
+        if ($field->image_path != null) {
+          unlink($field->image_path);
+        }
+        $field->image_name = $file_name;
+        $field->image_path = 'uploads/blogs/' . $file_name;
       }
     }
     $field->title = $request['title'];

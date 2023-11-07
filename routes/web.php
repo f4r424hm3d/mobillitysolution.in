@@ -6,9 +6,20 @@ use App\Http\Controllers\admin\AuthorC;
 use App\Http\Controllers\admin\BlogC;
 use App\Http\Controllers\admin\BlogCategoryC;
 use App\Http\Controllers\admin\DynamicPageSeoC;
+use App\Http\Controllers\admin\ProductC;
+use App\Http\Controllers\admin\ProductCategoryC;
+use App\Http\Controllers\admin\ProductSubCategoryC;
 use App\Http\Controllers\admin\StaticPageSeoC;
 use App\Http\Controllers\admin\UserC;
 use App\Http\Controllers\CommonController;
+use App\Http\Controllers\front\AboutFc;
+use App\Http\Controllers\front\BlogFc;
+use App\Http\Controllers\front\CareerFc;
+use App\Http\Controllers\front\ContactFc;
+use App\Http\Controllers\front\HomeFc;
+use App\Http\Controllers\front\InquiryController;
+use App\Http\Controllers\front\SolutionFc;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -79,14 +90,25 @@ Route::get('/f/migrate', function () {
 });
 
 /* FRONT ROUTE */
+Route::get('/', [HomeFc::class, 'index']);
+Route::get('/what-make-us-different', [HomeFc::class, 'whatMakeUsDifferent']);
+Route::get('/privacy-policy', [HomeFc::class, 'privacyPolicy']);
+Route::get('/about-us', [AboutFc::class, 'index']);
+Route::get('/contact-us', [ContactFc::class, 'index']);
+Route::get('/thank-you', [ContactFc::class, 'thankYou']);
+Route::get('/career', [CareerFc::class, 'index']);
+Route::get('/solutions', [SolutionFc::class, 'index']);
 
+Route::get('/news', [BlogFc::class, 'index']);
+Route::get('/news/{slug}', [BlogFc::class, 'blogByCategory']);
+$blogs = Blog::all();
+foreach ($blogs as $row) {
+  Route::get('/' . $row->slug, [BlogFc::class, 'blogdetail']);
+}
 
-// Route::get('/blog/', [BlogFc::class, 'index']);
-// Route::get('/blog/{slug}/', [BlogFc::class, 'blogByCategory']);
-// $blogs = Blog::all();
-// foreach ($blogs as $row) {
-//   Route::get('/' . $row->slug, [BlogFc::class, 'blogdetail']);
-// }
+Route::post('inquiry/contact-us', [InquiryController::class, 'submitContactUs']);
+Route::post('inquiry/appointment', [InquiryController::class, 'appointment']);
+
 
 /* ADMIN ROUTES BEFORE LOGIN */
 Route::middleware(['adminLoggedOut'])->group(function () {
@@ -120,6 +142,30 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::get('/update/{id}', [BlogC::class, 'index']);
       Route::post('/update/{id}', [BlogC::class, 'update']);
       Route::post('/store-ajax', [BlogC::class, 'storeAjax']);
+    });
+    Route::prefix('/product-categories')->group(function () {
+      Route::get('', [ProductCategoryC::class, 'index']);
+      Route::get('get-data', [ProductCategoryC::class, 'getData']);
+      Route::get('/delete/{id}', [ProductCategoryC::class, 'delete']);
+      Route::get('/update/{id}', [ProductCategoryC::class, 'index']);
+      Route::post('/update/{id}', [ProductCategoryC::class, 'update']);
+      Route::post('/store-ajax', [ProductCategoryC::class, 'storeAjax']);
+    });
+    Route::prefix('/product-sub-categories')->group(function () {
+      Route::get('', [ProductSubCategoryC::class, 'index']);
+      Route::get('get-data', [ProductSubCategoryC::class, 'getData']);
+      Route::get('/delete/{id}', [ProductSubCategoryC::class, 'delete']);
+      Route::get('/update/{id}', [ProductSubCategoryC::class, 'index']);
+      Route::post('/update/{id}', [ProductSubCategoryC::class, 'update']);
+      Route::post('/store-ajax', [ProductSubCategoryC::class, 'storeAjax']);
+    });
+    Route::prefix('/products')->group(function () {
+      Route::get('', [ProductC::class, 'index']);
+      Route::get('get-data', [ProductC::class, 'getData']);
+      Route::get('/delete/{id}', [ProductC::class, 'delete']);
+      Route::get('/update/{id}', [ProductC::class, 'index']);
+      Route::post('/update/{id}', [ProductC::class, 'update']);
+      Route::post('/store-ajax', [ProductC::class, 'storeAjax']);
     });
     Route::prefix('/authors')->group(function () {
       Route::get('', [AuthorC::class, 'index']);
@@ -161,4 +207,6 @@ Route::prefix('common')->group(function () {
   Route::get('/change-status', [CommonController::class, 'changeStatus']);
   Route::get('/update-field', [CommonController::class, 'updateFieldById']);
   Route::get('/update-bulk-field', [CommonController::class, 'updateBulkField']);
+
+  Route::get('/get-sub-category-by-category', [CommonController::class, 'getSubCategoryByCategory']);
 });

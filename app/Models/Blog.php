@@ -14,6 +14,6 @@ class Blog extends Model
   }
   public function getAuthor()
   {
-    return $this->hasOne(Author::class, 'id', 'author_id');
+    return $this->hasOne(User::class, 'id', 'author_id');
   }
 }

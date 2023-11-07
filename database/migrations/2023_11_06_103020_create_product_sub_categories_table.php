@@ -21,6 +21,11 @@ return new class extends Migration
       $table->longText('description')->nullable();
       $table->unsignedBigInteger('category_id');
       $table->foreign('category_id')->references('id')->on('product_categories')->cascadeOnDelete()->cascadeOnUpdate();
+      $table->text('meta_title')->nullable();
+      $table->text('meta_keyword')->nullable();
+      $table->longText('meta_description')->nullable();
+      $table->text('page_content')->nullable();
+      $table->integer('seo_rating')->nullable();
       $table->timestamps();
     });
   }
