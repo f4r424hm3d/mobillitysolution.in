@@ -137,49 +137,28 @@
   </section>
   <!-- Counter area end -->
 
-  <!-- Team area start -->
-  <section class="team__area pt-100 pb-100">
-    <div class="sec-title-wrapper">
-      <h2 class="sec-sub-title">Our Team</h2>
-      <h3 class="sec-title">How we work</h3>
-    </div>
-
-    <div class="swiper team__slider">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide team__slide">
-          <img src="{{ url('web/') }}/assets/imgs/team/1.jpg" alt="image">
-          <div class="team__info">
-            <h4 class="team__member-name">Naveen Ahlawat</h4>
-            <h5 class="team__member-role">Founder & CEO</h5>
-          </div>
-        </div>
-
-        <div class="swiper-slide team__slide">
-          <img src="{{ url('web/') }}/assets/imgs/team/2.jpg" alt="image">
-          <div class="team__info">
-            <h4 class="team__member-name">Aman Ahlawat</h4>
-            <h5 class="team__member-role">Designation Here</h5>
-          </div>
-        </div>
-
-        <div class="swiper-slide team__slide">
-          <img src="{{ url('web/') }}/assets/imgs/team/3.jpg" alt="image">
-          <div class="team__info">
-            <h4 class="team__member-name">Abdul Rafay</h4>
-            <h5 class="team__member-role">Digital Marketer</h5>
-          </div>
-        </div>
-
-        <div class="swiper-slide team__slide">
-          <img src="{{ url('web/') }}/assets/imgs/team/4.jpg" alt="image">
-          <div class="team__info">
-            <h4 class="team__member-name">Faraz Ahmed</h4>
-            <h5 class="team__member-role">Developer</h5>
-          </div>
-        </div>
-
+  @if ($team->count() > 0)
+    <!-- Team area start -->
+    <section class="team__area pt-100 pb-100">
+      <div class="sec-title-wrapper">
+        <h2 class="sec-sub-title">Our Team</h2>
+        <h3 class="sec-title">How we work</h3>
       </div>
-    </div>
-  </section>
-  <!-- Team area end -->
+
+      <div class="swiper team__slider">
+        <div class="swiper-wrapper">
+          @foreach ($team as $row)
+            <div class="swiper-slide team__slide">
+              <img src="{{ asset($row->photo_path) }}" alt="{{ $row->name }}">
+              <div class="team__info">
+                <h4 class="team__member-name">{{ $row->name }}</h4>
+                <h5 class="team__member-role">{{ $row->designation }}</h5>
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </div>
+    </section>
+    <!-- Team area end -->
+  @endif
 @endsection
