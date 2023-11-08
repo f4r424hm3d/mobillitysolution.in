@@ -22,6 +22,7 @@ use App\Http\Controllers\front\InquiryController;
 use App\Http\Controllers\front\SolutionFc;
 use App\Http\Controllers\admin\ProductCategoryFaqC;
 use App\Http\Controllers\admin\ProductSubCategoryFaqC;
+use App\Http\Controllers\admin\UploadFilesC;
 use App\Models\Blog;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -236,8 +237,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::post('/update/{id}', [DynamicPageSeoC::class, 'update']);
       Route::post('/store-ajax', [DynamicPageSeoC::class, 'storeAjax']);
     });
-
-
+    Route::prefix('/upload-files')->group(function () {
+      Route::get('/', [UploadFilesC::class, 'index']);
+      Route::get('/get-data', [UploadFilesC::class, 'getData']);
+      Route::get('/delete/{id}', [UploadFilesC::class, 'delete']);
+      Route::post('/store-ajax', [UploadFilesC::class, 'storeAjax']);
+      Route::get('/update/{id}', [UploadFilesC::class, 'index']);
+      Route::post('/update/{id}', [UploadFilesC::class, 'update']);
+    });
     Route::prefix('/users')->group(function () {
       Route::get('', [UserC::class, 'index']);
       Route::post('/store', [UserC::class, 'store']);
