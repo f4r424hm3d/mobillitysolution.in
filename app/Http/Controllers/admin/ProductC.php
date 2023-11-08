@@ -141,6 +141,10 @@ class ProductC extends Controller
                       class="waves-effect waves-light btn btn-xs btn-outline btn-info">
                       <i class="fa fa-edit" aria-hidden="true"></i>
                     </a>
+        <a href="' . url("admin/product-content/" . $row->id) . '"
+                      class="waves-effect waves-light btn btn-xs btn-outline btn-info">
+                      Content
+                    </a>
       </td>
     </tr>';
         $i++;

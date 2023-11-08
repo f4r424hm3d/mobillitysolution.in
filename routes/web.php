@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\BlogCategoryC;
 use App\Http\Controllers\admin\DynamicPageSeoC;
 use App\Http\Controllers\admin\ProductC;
 use App\Http\Controllers\admin\ProductCategoryC;
+use App\Http\Controllers\admin\ProductContentC;
 use App\Http\Controllers\admin\ProductSubCategoryC;
 use App\Http\Controllers\admin\StaticPageSeoC;
 use App\Http\Controllers\admin\UserC;
@@ -182,6 +183,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::get('/update/{id}', [ProductC::class, 'index']);
       Route::post('/update/{id}', [ProductC::class, 'update']);
       Route::post('/store-ajax', [ProductC::class, 'storeAjax']);
+    });
+    Route::prefix('/product-content/')->group(function () {
+      Route::get('/get-data', [ProductContentC::class, 'getData']);
+      Route::get('/delete/{id}', [ProductContentC::class, 'delete']);
+      Route::post('/store-ajax', [ProductContentC::class, 'storeAjax']);
+      Route::get('/{product_id}/', [ProductContentC::class, 'index']);
+      Route::get('{product_id}/update/{id}', [ProductContentC::class, 'index']);
+      Route::post('{product_id}/update/{id}', [ProductContentC::class, 'update']);
     });
     Route::prefix('/authors')->group(function () {
       Route::get('', [AuthorC::class, 'index']);

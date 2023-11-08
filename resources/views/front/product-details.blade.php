@@ -136,16 +136,18 @@
         <div class="row">
           <div class="portfolio__inner-5">
 
-            <div class="portfolio__item-5">
-              <img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image">
-              <div class="portfolio__content-5">
-                <h2 class="portfolio__name-5">Hand prosthetics</h2>
-                <h3 class="portfolio__title-5 mb-2">{{ $row->product_name }}</h3>
-                <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                      class="fa-solid fa-arrow-right"></i></span></a>
+            @foreach ($relatedProducts as $row)
+              <div class="portfolio__item-5">
+                <img src="{{ asset($row->thumbnail_path) }}" alt="{{ $row->product_name }}">
+                <div class="portfolio__content-5">
+                  {{-- <h2 class="portfolio__name-5">Hand prosthetics</h2> --}}
+                  <h3 class="portfolio__title-5 mb-2">{{ $row->product_name }}</h3>
+                  <a href="{{ url($row->product_slug) }}" class="blog__btn">View Product Details <span><i
+                        class="fa-solid fa-arrow-right"></i></span></a>
+                </div>
+                </a>
               </div>
-              </a>
-            </div>
+            @endforeach
 
           </div>
         </div>
