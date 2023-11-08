@@ -101,6 +101,7 @@ Route::get('/what-make-us-different', [HomeFc::class, 'whatMakeUsDifferent']);
 Route::get('/privacy-policy', [HomeFc::class, 'privacyPolicy']);
 Route::get('/about-us', [AboutFc::class, 'index']);
 Route::get('/contact-us', [ContactFc::class, 'index']);
+Route::get('/enquiry', [ContactFc::class, 'enquiry']);
 Route::get('/thank-you', [ContactFc::class, 'thankYou']);
 Route::get('/career', [CareerFc::class, 'index']);
 

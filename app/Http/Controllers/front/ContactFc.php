@@ -11,4 +11,8 @@ class ContactFc extends Controller
   {
     return view('front.contact');
   }
+  public function enquiry(Request $request)
+  {
+    return view('front.enquiry');
+  }
 }
