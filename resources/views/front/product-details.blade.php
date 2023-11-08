@@ -50,64 +50,23 @@
 
               <div class="woocomerce__single-varitions">
                 <div class="accordion" id="accordionExample">
-                  <div class="accordion-item">
-                    <div class="accordion-header" id="headingOne">
-                      <div class="accordion-button collapsed bg-light" role="contentinfo" data-bs-toggle="collapse"
-                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        <div class="woocomerce__single-stitle">Accordian - 1</div>
+                  @foreach ($row->getContents as $pc)
+                    <div class="accordion-item">
+                      <div class="accordion-header" id="headingOne{{ $pc->id }}">
+                        <div class="accordion-button collapsed bg-light" role="contentinfo" data-bs-toggle="collapse"
+                          data-bs-target="#collapseOne{{ $pc->id }}" aria-expanded="false"
+                          aria-controls="collapseOne{{ $pc->id }}">
+                          <div class="woocomerce__single-stitle">{{ $pc->title }}</div>
+                        </div>
+                      </div>
+                      <div id="collapseOne{{ $pc->id }}" class="accordion-collapse collapse"
+                        aria-labelledby="headingOne{{ $pc->id }}" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          {!! $pc->description !!}
+                        </div>
                       </div>
                     </div>
-                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
-                      data-bs-parent="#accordionExample">
-                      <div class="accordion-body">
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                          has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                          took a galley of type and scrambled it to make a type specimen book. It has survived not
-                          only five centuries, but also the leap into electronic typesetting, remaining essentially
-                          unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-                          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                          PageMaker including versions of Lorem Ipsum.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="accordion-item">
-                    <div class="accordion-header" id="headingTwo">
-                      <div class="accordion-button collapsed bg-light" role="contentinfo" data-bs-toggle="collapse"
-                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <div class="woocomerce__single-stitle">Accordian - 2</div>
-                      </div>
-                    </div>
-                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                      data-bs-parent="#accordionExample">
-                      <div class="accordion-body">
-                        <table>
-                          <tbody>
-                            <tr>
-                              <td>Lorem Ipsum</td>
-                              <td>simply dummy text</td>
-                            </tr>
-                            <tr>
-                              <td>Lorem Ipsum</td>
-                              <td>simply dummy text</td>
-                            </tr>
-                            <tr>
-                              <td>Lorem Ipsum</td>
-                              <td>simply dummy text</td>
-                            </tr>
-                            <tr>
-                              <td>Lorem Ipsum</td>
-                              <td>simply dummy text</td>
-                            </tr>
-                            <tr>
-                              <td>Lorem Ipsum</td>
-                              <td>simply dummy text</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
+                  @endforeach
                 </div>
               </div>
 
@@ -155,104 +114,5 @@
     </section>
     <!-- Related Product end -->
   @endif
-
-  <section class="faq__area bg-light">
-    <div class="container g-0 pt-100 pb-100">
-      <div class="row">
-
-        <div class="col-lg-12">
-          <div>
-            <h2 class="faq__title">Faqs</h2>
-
-            <div class="faq__list">
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Design
-                      should enrich our day</button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                        an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Bring their
-                      individual experience and creative</button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                        an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Human
-                      centred design to challenges
-                    </button>
-                  </h2>
-                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                        an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Design
-                      should enrich our day</button>
-                  </h2>
-                  <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                        an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingFive">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">Developing
-                      core web applications
-                    </button>
-                  </h2>
-                  <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
-                    data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <p class="text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting
-                        industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                        an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- Products area end -->
 @endsection
