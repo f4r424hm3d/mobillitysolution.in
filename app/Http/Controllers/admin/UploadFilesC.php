@@ -71,7 +71,7 @@ class UploadFilesC extends Controller
     if ($id) {
       $data = UploadFiles::findOrFail($id);
       if ($data->file_path != null) {
-        unlink(public_path($data->file_path));
+        unlink($data->file_path);
       }
       $data->delete();
       return response()->json(['success' => 'Record hase been deleted successfully.']);
