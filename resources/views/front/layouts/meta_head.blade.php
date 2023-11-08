@@ -43,3 +43,4 @@
 <link rel="stylesheet" href="{{ url('web') }}/assets/css/meanmenu.min.css">
 <link rel="stylesheet" href="{{ url('web') }}/assets/css/master.css">
 <link rel="stylesheet" href="{{ url('web') }}/assets/css/responsive.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

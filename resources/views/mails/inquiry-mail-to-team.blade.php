@@ -44,7 +44,6 @@
     .blue-btn:hover {
       background: #e74e84;
     }
-
   </style>
 </head>
 
@@ -59,8 +58,8 @@
             <td valign="top" align="center" class="masthead"
               style="padding:20px 0px 5px 0px;background:#3f4079;color:white;">
               <h1 style="font-size:32px;margin:0 auto;max-width:90%;line-height:1.25;">
-                <a href="https://mudraeducation.org" target="_blank" style="text-decoration:none;color:#ffffff;">Mudra
-                  Education</a>
+                <a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer"
+                  style="text-decoration:none;color:#ffffff;">{{ config('app.name') }}</a>
                 <p style="margin-bottom:0;line-height:12px;font-weight:normal;margin-top:15px;font-size:18px;"></p>
               </h1>
             </td>
@@ -68,15 +67,22 @@
           <tr>
             <td valign="top" class="content" style="background:white;padding:25px;">
               <p style="text-align: justify">
-                Hi {{ $name }},
+                Hi Team,<br>
+                New Inquiry from <b>{{ config('app.name') }}</b><br>
 
-                Your inquiry has been submitted. we'll contact you soon.
+              <ul>
+                <li>Name : {{ $name }}</li>
+                <li>Email : {{ $email }}</li>
+                <li>Mobile : {{ $mobile }}</li>
+                @if ($inquiry_message)
+                  <li>Exam : {{ $inquiry_message }}</li>
+                @endif
+              </ul>
               </p>
             </td>
           </tr>
           <tr>
-            <td valign="top" align="center" class="masthead"
-              style="padding:20px 0;background:#e74e84;color:white;">
+            <td valign="top" align="center" class="masthead" style="padding:20px 0;background:#e74e84;color:white;">
               <h1 style="font-size:32px;margin:0 auto;max-width:90%;line-height:1.25;">
               </h1>
             </td>

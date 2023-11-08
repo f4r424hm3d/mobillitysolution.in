@@ -58,8 +58,8 @@
             <td valign="top" align="center" class="masthead"
               style="padding:20px 0px 5px 0px;background:#3f4079;color:white;">
               <h1 style="font-size:32px;margin:0 auto;max-width:90%;line-height:1.25;">
-                <a href="https://mudraeducation.org" target="_blank" style="text-decoration:none;color:#ffffff;">Mudra
-                  Education</a>
+                <a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer"
+                  style="text-decoration:none;color:#ffffff;">{{ config('app.name') }}</a>
                 <p style="margin-bottom:0;line-height:12px;font-weight:normal;margin-top:15px;font-size:18px;"></p>
               </h1>
             </td>
@@ -67,13 +67,20 @@
           <tr>
             <td valign="top" class="content" style="background:white;padding:25px;">
               <p style="text-align: justify">
-                Hello {{ ucwords($name) }},
+                Hi Team,<br>
+                New Appointment Inquiry from <b>{{ config('app.name') }}</b><br>
 
-                Your scholarship mock test is start on
-                <b>{{ getFormattedDate($start_time, 'd M Y - h:i A') }}</b> and it'll end on
-                <b>{{ getFormattedDate($end_time, 'd M Y - h:i A') }}</b>.
+              <ul>
+                <li>Name : {{ $name }}</li>
+                <li>Email : {{ $email }}</li>
+                <li>Mobile : {{ $mobile }}</li>
+                <li>Category : {{ $category }}</li>
+                <li>Sub Category : {{ $sub_category }}</li>
+                @if ($inquiry_message)
+                  <li>Exam : {{ $inquiry_message }}</li>
+                @endif
+              </ul>
               </p>
-              <button class="pink-btn"><a href="{{ url('student/tests') }}">Log in</a></button>
             </td>
           </tr>
           <tr>

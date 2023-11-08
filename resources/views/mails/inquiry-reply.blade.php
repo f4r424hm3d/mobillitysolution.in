@@ -15,32 +15,24 @@
           <tr>
             <td valign="top" align="center" class="masthead" style="padding:20px 0;background:#03618c;color:white;">
               <h1 style="font-size:32px;margin:0 auto;max-width:90%;line-height:1.25;">
-                <a href="https://www.ieltspractice.britannicaoverseas.com/" target="_blank"
-                  style="text-decoration:none;color:#ffffff;">
-                  {{ config('app.name') }}
-                </a>
+                <a href="{{ url('/') }}" target="_blank" rel="noopener noreferrer"
+                  style="text-decoration:none;color:#ffffff;">{{ config('app.name') }}</a>
                 <p style="margin-bottom:0;line-height:12px;font-weight:normal;margin-top:15px;font-size:18px;"></p>
               </h1>
             </td>
           </tr>
           <tr>
             <td valign="top" class="content" style="background:white;padding:20px 35px 10px 35px;">
-              <h3>Hello {{ $name }}, </h3>
+              <h3>Hello
+                {{ $name }},
+              </h3>
               <p style="text-align: justify">
-                {{ $otp }} is your One Time Password (OTP) from <b>Britannica Overseas</b>. It will expire in
-                next
-                5 minutes.
+                Thank you for contacting us. We will be in touch with you shortly.
                 <br>
                 <br>
                 <br>
-                In case of any queries, feel free to contact us at <span
-                  style="color: #fcb709;font-weight:bold">info@britannicaoverseas.com</span>
               </p>
               <hr>
-              {{-- <p style="text-align: justify">
-                <b>Our mailing address is:</b><br>
-                B-16 ground floor Gurugram, Mayfield Garden,<br>Sector 50, Gurugram
-              </p> --}}
             </td>
           </tr>
           <tr>
