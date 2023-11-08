@@ -248,6 +248,12 @@
                 </div>
               </li>
               <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle arrow-none" href="{{ aurl('team') }}" id="topnav-dashboard"
+                  role="button" title="Dashboard">
+                  <i data-feather="users"></i> Team
+                </a>
+              </li>
+              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="{{ aurl('upload-files') }}"
                   id="topnav-dashboard" role="button" title="Dashboard">
                   <i data-feather="file-text"></i> Upload Files
