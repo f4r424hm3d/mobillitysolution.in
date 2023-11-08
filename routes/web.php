@@ -20,6 +20,8 @@ use App\Http\Controllers\front\ContactFc;
 use App\Http\Controllers\front\HomeFc;
 use App\Http\Controllers\front\InquiryController;
 use App\Http\Controllers\front\SolutionFc;
+use App\Http\Controllers\admin\ProductCategoryFaqC;
+use App\Http\Controllers\admin\ProductSubCategoryFaqC;
 use App\Models\Blog;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -168,6 +170,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::post('/update/{id}', [ProductCategoryC::class, 'update']);
       Route::post('/store-ajax', [ProductCategoryC::class, 'storeAjax']);
     });
+    Route::prefix('/category-faqs/')->group(function () {
+      Route::get('/get-data', [ProductCategoryFaqC::class, 'getData']);
+      Route::get('/delete/{id}', [ProductCategoryFaqC::class, 'delete']);
+      Route::post('/store-ajax', [ProductCategoryFaqC::class, 'storeAjax']);
+      Route::get('/{category_id}/', [ProductCategoryFaqC::class, 'index']);
+      Route::get('{category_id}/update/{id}', [ProductCategoryFaqC::class, 'index']);
+      Route::post('{category_id}/update/{id}', [ProductCategoryFaqC::class, 'update']);
+    });
     Route::prefix('/product-sub-categories')->group(function () {
       Route::get('', [ProductSubCategoryC::class, 'index']);
       Route::get('get-data', [ProductSubCategoryC::class, 'getData']);
@@ -175,6 +185,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::get('/update/{id}', [ProductSubCategoryC::class, 'index']);
       Route::post('/update/{id}', [ProductSubCategoryC::class, 'update']);
       Route::post('/store-ajax', [ProductSubCategoryC::class, 'storeAjax']);
+    });
+    Route::prefix('/sub-category-faqs/')->group(function () {
+      Route::get('/get-data', [ProductSubCategoryFaqC::class, 'getData']);
+      Route::get('/delete/{id}', [ProductSubCategoryFaqC::class, 'delete']);
+      Route::post('/store-ajax', [ProductSubCategoryFaqC::class, 'storeAjax']);
+      Route::get('/{sub_category_id}/', [ProductSubCategoryFaqC::class, 'index']);
+      Route::get('{sub_category_id}/update/{id}', [ProductSubCategoryFaqC::class, 'index']);
+      Route::post('{sub_category_id}/update/{id}', [ProductSubCategoryFaqC::class, 'update']);
     });
     Route::prefix('/products')->group(function () {
       Route::get('', [ProductC::class, 'index']);
