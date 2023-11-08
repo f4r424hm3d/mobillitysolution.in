@@ -228,6 +228,7 @@ Route::middleware(['adminLoggedIn'])->group(function () {
     });
     Route::prefix('/dynamic-page-seo')->group(function () {
       Route::get('', [DynamicPageSeoC::class, 'index']);
+      Route::get('add', [DynamicPageSeoC::class, 'index']);
       Route::get('get-data', [DynamicPageSeoC::class, 'getData']);
       Route::get('/delete/{id}', [DynamicPageSeoC::class, 'delete']);
       Route::get('/update/{id}', [DynamicPageSeoC::class, 'index']);

@@ -90,10 +90,7 @@ class DynamicPageSeoC extends Controller
 
 
       $output .= '<td>
-        <a href="javascript:void()" onclick="DeleteAjax(' . $row->id . ')"
-          class="waves-effect waves-light btn btn-xs btn-outline btn-danger">
-          <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
+
         <a href="' . url("admin/dynamic-page-seo/update/" . $row->id) . '"
                       class="waves-effect waves-light btn btn-xs btn-outline btn-info">
                       <i class="fa fa-edit" aria-hidden="true"></i>
