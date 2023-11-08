@@ -52,32 +52,53 @@
         </div>
         <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7">
           <div class="contact__form">
-            <form action="" method="POST">
+            <form action="{{ url('inquiry/contact-us') }}" method="post">
+              @csrf
+              <input type="hidden" name="source" value="contact-us">
+              <input type="hidden" name="source_path" value="{{ URL::full() }}">
               <div class="row g-3">
                 <div class="col-xxl-6 col-xl-6 col-12">
-                  <input type="text" name="name" placeholder="Name *">
+                  <input type="text" placeholder="Write your name" name="name" id="name"
+                    value="{{ old('name') }}">
+                  @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-12">
-                  <input type="email" name="email" placeholder="Email *">
+                  <input type="email" placeholder="example@gmail.com" name="email" id="email"
+                    value="{{ old('email') }}">
+                  @error('email')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
               <div class="row g-3">
                 <div class="col-xxl-6 col-xl-6 col-12">
-                  <input type="tel" name="phone" placeholder="Phone">
+                  <input type="text" placeholder="+66 555 666 888 22" name="mobile" id="mobile"
+                    value="{{ old('mobile') }}">
+                  @error('mobile')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-12">
-                  <input type="text" name="subject" placeholder="Subject *">
+                  <input type="text" name="subject" placeholder="Subject *" value="{{ old('subject') }}">
+                  @error('subject')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
               <div class="row g-3">
                 <div class="col-12">
-                  <textarea name="message" placeholder="Messages *"></textarea>
+                  <textarea name="message" id="message" type="text" placeholder="Enter your message here">{{ old('message') }}</textarea>
+                  @error('message')
+                    <span class="text-danger">{{ $message }}</span>
+                  @enderror
                 </div>
               </div>
               <div class="row g-3">
                 <div class="col-12">
                   <div class="btn_wrapper">
-                    <button class="wc-btn-primary btn-hover btn-item"><span></span> Send <br>Messages <i
+                    <button class="wc-btn-primary btn-hover btn-item" type="submit"><span></span> Send <br>Messages <i
                         class="fa-solid fa-arrow-right"></i></button>
                   </div>
                 </div>

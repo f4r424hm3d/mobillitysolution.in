@@ -77,7 +77,7 @@
                 <li>Category : {{ $category }}</li>
                 <li>Sub Category : {{ $sub_category }}</li>
                 @if ($inquiry_message)
-                  <li>Exam : {{ $inquiry_message }}</li>
+                  <li>Message : {{ $inquiry_message }}</li>
                 @endif
               </ul>
               </p>

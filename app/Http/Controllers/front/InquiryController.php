@@ -20,8 +20,14 @@ class InquiryController extends Controller
         'name' => 'required',
         'mobile' => 'required|numeric',
         'email' => 'required|email',
-        'message' => [
+        'subject' => [
           'required',
+          'string',
+          'max:100', // You can adjust the max length as needed
+          'regex:/^[a-zA-Z0-9\s!@#$%^&*(),.?:"{}|<>]+$/',
+        ],
+        'message' => [
+          'nullable',
           'string',
           'max:500', // You can adjust the max length as needed
           'regex:/^[a-zA-Z0-9\s!@#$%^&*(),.?:"{}|<>]+$/',
@@ -32,6 +38,7 @@ class InquiryController extends Controller
     $field->name = $request['name'];
     $field->mobile = $request['mobile'];
     $field->email = $request['email'];
+    $field->subject = $request['subject'];
     $field->message = $request['message'];
     $field->source = $request['source'];
     $field->source_path = $request['source_path'];
@@ -42,6 +49,7 @@ class InquiryController extends Controller
       'name' => $request['name'],
       'email' => $request['email'],
       'mobile' => $request['mobile'],
+      'subject' => $request['subject'],
       'inquiry_message' => $request['message'],
       'source' => $request['source'],
       'source_path' => $request['source_path'],

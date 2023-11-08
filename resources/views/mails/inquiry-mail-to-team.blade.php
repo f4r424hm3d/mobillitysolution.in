@@ -74,8 +74,9 @@
                 <li>Name : {{ $name }}</li>
                 <li>Email : {{ $email }}</li>
                 <li>Mobile : {{ $mobile }}</li>
+                <li>Subject : {{ $subject }}</li>
                 @if ($inquiry_message)
-                  <li>Exam : {{ $inquiry_message }}</li>
+                  <li>Message : {{ $inquiry_message }}</li>
                 @endif
               </ul>
               </p>
