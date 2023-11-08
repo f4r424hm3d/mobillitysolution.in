@@ -20,6 +20,7 @@ use App\Http\Controllers\front\HomeFc;
 use App\Http\Controllers\front\InquiryController;
 use App\Http\Controllers\front\SolutionFc;
 use App\Models\Blog;
+use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductSubCategory;
 use Illuminate\Support\Facades\Artisan;
@@ -108,6 +109,10 @@ foreach ($cat as $row) {
 $subcat = ProductSubCategory::all();
 foreach ($subcat as $row) {
   Route::get('/' . $row->sub_category_slug, [SolutionFc::class, 'subDetail']);
+}
+$prod = Product::all();
+foreach ($prod as $row) {
+  Route::get('/' . $row->product_slug, [SolutionFc::class, 'prodDetail']);
 }
 
 Route::get('/news', [BlogFc::class, 'index']);

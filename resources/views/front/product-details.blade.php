@@ -9,10 +9,13 @@
       <ul class="woocomerce__single-breadcrumb">
         <li><a href="{{ url('/') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
         <li><a href="{{ url('solutions') }}">Solutions <i class="fa-solid fa-chevron-right"></i></a></li>
-        <li><a href="prosthetics.html">Prosthetic <i class="fa-solid fa-chevron-right"></i></a></li>
-        <li><a href="prosthetic-lower-limb.html">Lower Limb Prosthetics <i class="fa-solid fa-chevron-right"></i></a>
+        <li><a href="{{ url($row->getCategory->category_slug) }}">{{ $row->getCategory->category_name }} <i
+              class="fa-solid fa-chevron-right"></i></a>
         </li>
-        <li>Product Detail Page</li>
+        <li><a href="{{ url($row->getSubCategory->sub_category_slug) }}">{{ $row->getSubCategory->sub_category_name }} <i
+              class="fa-solid fa-chevron-right"></i></a>
+        </li>
+        <li>{{ $row->product_name }}</li>
       </ul>
     </div>
   </div>
@@ -26,69 +29,21 @@
 
         <div class="col-lg-6">
           <div class="woocomerce__single-left">
-            <img src="{{ url('web/') }}/assets/imgs/products/prosthetics/lower-limb-rosthetics/1.webp" alt="single-1"
-              class="img-fluid">
+            <img src="{{ asset($row->thumbnail_path) }}" alt="single-1" class="img-fluid">
           </div>
         </div>
 
         <div class="col-lg-6 pl-50 product-details">
           <div class="woocomerce__single-right wc_slide_btm">
             <div class="woocomerce__single-content">
-              <h2 class="woocomerce__single-title">Bebionic Hand</h2>
+              <h2 class="woocomerce__single-title">{{ $row->product_name }}</h2>
 
               <div class="show-more-box">
                 <div class="text show-more-height">
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                    the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                    of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                    popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-                    and more recently with desktop publishing software like Aldus PageMaker including versions of
-                    Lorem Ipsum.</p>
-
-                  <ul>
-                    <li>Cruelty free</li>
-                    <li>Adjustable drawstrings at the hood</li>
-                    <li>Eyelet embroidery</li>
-                    <li>Cruelty free</li>
-                    <li>Welt pockets at waist</li>
-                  </ul>
-
-                  <table>
-                    <tbody>
-                      <tr>
-                        <td>Lorem Ipsum</td>
-                        <td>simply dummy text</td>
-                      </tr>
-                      <tr>
-                        <td>Lorem Ipsum</td>
-                        <td>simply dummy text</td>
-                      </tr>
-                      <tr>
-                        <td>Lorem Ipsum</td>
-                        <td>simply dummy text</td>
-                      </tr>
-                      <tr>
-                        <td>Lorem Ipsum</td>
-                        <td>simply dummy text</td>
-                      </tr>
-                      <tr>
-                        <td>Lorem Ipsum</td>
-                        <td>simply dummy text</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  {!! $row->description !!}
                 </div>
                 <div class="show-more">Show Less</div>
               </div>
-
-              <ul>
-                <li>Cruelty free</li>
-                <li>Adjustable drawstrings at the hood</li>
-                <li>Eyelet embroidery</li>
-                <li>Cruelty free</li>
-                <li>Welt pockets at waist</li>
-              </ul>
 
               <a href="{{ url('enquiry') }}" class="blog__btn">Enquiry Now <span><i
                     class="fa-solid fa-arrow-right"></i></span></a>
@@ -164,93 +119,40 @@
     </div>
   </section>
 
-  <!-- Related Product start -->
-  <section class="portfolio__area-5">
-    <div class="container-fluid pt-100 pb-100">
-      <div class="row pb-5">
-        <div class="col-lg-12">
-          <div class="sec-title-wrapper">
-            <h3 class="sec-title">Related Products - 1</h3>
+  @if ($relatedProducts->count() > 0)
+    <!-- Related Product start -->
+    <section class="portfolio__area-5">
+      <div class="container-fluid pt-100 pb-100">
+        <div class="row pb-5">
+          <div class="col-lg-12">
+            <div class="sec-title-wrapper">
+              <h3 class="sec-title">Related Products</h3>
+            </div>
+            {{-- <p class="mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+              has been the industry's standard dummy text.</p> --}}
           </div>
-          <p class="mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry's standard dummy text.</p>
+        </div>
+
+        <div class="row">
+          <div class="portfolio__inner-5">
+
+            <div class="portfolio__item-5">
+              <img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image">
+              <div class="portfolio__content-5">
+                <h2 class="portfolio__name-5">Hand prosthetics</h2>
+                <h3 class="portfolio__title-5 mb-2">{{ $row->product_name }}</h3>
+                <a href="product-details.html" class="blog__btn">View Product Details <span><i
+                      class="fa-solid fa-arrow-right"></i></span></a>
+              </div>
+              </a>
+            </div>
+
+          </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="portfolio__inner-5">
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-            </a>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/2.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-            </a>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-            </a>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/2.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-            </a>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/1.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-            </a>
-          </div>
-
-          <div class="portfolio__item-5">
-            <img src="{{ url('web/') }}/assets/imgs/products/home/2.jpg" alt="Image">
-            <div class="portfolio__content-5">
-              <h2 class="portfolio__name-5">Hand prosthetics</h2>
-              <h3 class="portfolio__title-5 mb-2">Bebionic Hand</h3>
-              <a href="product-details.html" class="blog__btn">View Product Details <span><i
-                    class="fa-solid fa-arrow-right"></i></span></a>
-            </div>
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- Related Product end -->
+    </section>
+    <!-- Related Product end -->
+  @endif
 
   <section class="faq__area bg-light">
     <div class="container g-0 pt-100 pb-100">
