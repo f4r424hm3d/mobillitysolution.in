@@ -28,15 +28,16 @@
       <a class="woocomerce__footer-mail" href="mailto:info@mobillitysolution.in">info@mobillitysolution.in</a>
       <a class="woocomerce__footer-phone" href="callTo:25487567744">+2 574 - 328 - 301</a>
     </div>
-
+    @php
+      use App\Models\ProductCategory;
+      $categories = ProductCategory::limit(5)->get();
+    @endphp
     <div class="woocomerce__footer-category category1">
       <span class="woocomerce__footer-title">Category</span>
       <ul class="woocomerce__footer-list">
-        <li><a href="#">Woman</a></li>
-        <li><a href="#">Man</a></li>
-        <li><a href="#">Kids & Baby</a></li>
-        <li><a href="#">Jewellery</a></li>
-        <li><a href="#">Beauty</a></li>
+        @foreach ($categories as $cat)
+          <li><a href="{{ url($cat->category_slug) }}">{{ $cat->category_name }}</a></li>
+        @endforeach
       </ul>
     </div>
 

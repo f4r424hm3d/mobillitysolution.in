@@ -1,3 +1,7 @@
+@php
+  use App\Models\ProductCategory;
+  $categories = ProductCategory::all();
+@endphp
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -83,26 +87,15 @@
               </li>
               <li><a href="{{ url('solutions') }}">Solutions</a>
                 <ul>
-                  <li><a href="prosthetics.html">Prosthetics</a>
-                    <ul>
-                      <li><a href="prosthetic-lower-limb.html">Lower limb</a></li>
-                      <li><a href="#">Upper limb</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Orthetics</a>
-                    <ul>
-                      <li><a href="prosthetic-lower-limb.html">Lower limb</a></li>
-                      <li><a href="#">Upper limb</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Rehab Products</a>
-                    <ul>
-                      <li><a href="#">Silicon products</a></li>
-                      <li><a href="#">Silicon products</a></li>
-                      <li><a href="#">Silicon products</a></li>
-                      <li><a href="#">Silicon products</a></li>
-                    </ul>
-                  </li>
+                  @foreach ($categories as $cat)
+                    <li><a href="{{ url($cat->category_slug) }}">{{ $cat->category_name }}</a>
+                      <ul>
+                        @foreach ($cat->getAllSubCategory as $subcat)
+                          <li><a href="{{ url($subcat->sub_category_slug) }}">{{ $subcat->sub_category_name }}</a>
+                        @endforeach
+                      </ul>
+                    </li>
+                  @endforeach
                 </ul>
               </li>
               <li><a href="{{ url('career') }}">Career</a></li>
