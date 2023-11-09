@@ -128,9 +128,9 @@ class HomePageBannerC extends Controller
   {
     if ($id) {
       $row = HomePageBanner::findOrFail($id);
-      //   if ($row->photo_path != null) {
-      //     unlink($row->photo_path);
-      //   }
+      if ($row->banner_path != null) {
+        unlink($row->banner_path);
+      }
       echo $result = $row->delete();
     }
   }
