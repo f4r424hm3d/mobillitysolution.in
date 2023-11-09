@@ -118,7 +118,7 @@ class JobVacancyC extends Controller
   public function storeAjax(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'designation' => 'required',
+      'designation' => 'required|unique:job_vacancies,designation',
       'location' => 'required',
       'no_of_position' => 'required',
       'last_date' => 'required',
@@ -135,6 +135,7 @@ class JobVacancyC extends Controller
 
     $field = new JobVacancy;
     $field->designation = $request['designation'];
+    $field->slug = slugify($request['designation']);
     $field->location = $request['location'];
     $field->no_of_position = $request['no_of_position'];
     $field->experience = $request['experience'];
@@ -158,7 +159,7 @@ class JobVacancyC extends Controller
   {
     $request->validate(
       [
-        'designation' => 'required',
+        'designation' => 'required|unique:job_vacancies,designation,' . $id,
         'location' => 'required',
         'no_of_position' => 'required',
         'last_date' => 'required',
@@ -169,6 +170,7 @@ class JobVacancyC extends Controller
     );
     $field = JobVacancy::find($id);
     $field->designation = $request['designation'];
+    $field->slug = slugify($request['designation']);
     $field->location = $request['location'];
     $field->no_of_position = $request['no_of_position'];
     $field->experience = $request['experience'];

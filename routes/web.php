@@ -26,6 +26,7 @@ use App\Http\Controllers\front\HomeFc;
 use App\Http\Controllers\front\InquiryController;
 use App\Http\Controllers\front\SolutionFc;
 use App\Models\Blog;
+use App\Models\JobVacancy;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductSubCategory;
@@ -106,7 +107,14 @@ Route::get('/about-us', [AboutFc::class, 'index']);
 Route::get('/contact-us', [ContactFc::class, 'index']);
 Route::get('/enquiry', [ContactFc::class, 'enquiry']);
 Route::get('/thank-you', [ContactFc::class, 'thankYou']);
+
+
 Route::get('/career', [CareerFc::class, 'index']);
+$jobs = JobVacancy::all();
+foreach ($jobs as $row) {
+  Route::get('/' . $row->slug, [CareerFc::class, 'jobDetail']);
+}
+
 
 Route::get('/solutions', [SolutionFc::class, 'index']);
 $cat = ProductCategory::all();

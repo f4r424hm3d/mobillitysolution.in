@@ -70,61 +70,39 @@
     </div>
   </section>
 
-  <section class="job__area pt-100 pb-100" id="job_list">
-    <div class="container">
-      <div class="row">
-        <div class="col-xxl-12">
-          <div class="sec-title-wrapper">
-            <h2 class="sec-title">We’re Currently <br>hiring</h2>
+  @if ($jobs->count() > 0)
+    <section class="job__area pt-100 pb-100" id="job_list">
+      <div class="container">
+        <div class="row">
+          <div class="col-xxl-12">
+            <div class="sec-title-wrapper">
+              <h2 class="sec-title">We’re Currently <br>hiring</h2>
+            </div>
           </div>
-        </div>
-        <div class="col-xxl-12">
-          <div class="job__list">
-            <a href="career-detail.html">
-              <div class="job__item">
-                <p class="job__no">01</p>
-                <h3 class="job__title">UI/UX Designer</h3>
-                <h4 class="job__open">(01 Open Roles)</h4>
-                <div class="job__link"><span><i class="fa-solid fa-arrow-right"></i></span></div>
-              </div>
-            </a>
-            <a href="career-detail.html">
-              <div class="job__item">
-                <p class="job__no">02</p>
-                <h3 class="job__title">Frontend Developer</h3>
-                <h4 class="job__open">(02 Open Roles)</h4>
-                <div class="job__link"><span><i class="fa-solid fa-arrow-right"></i></span></div>
-              </div>
-            </a>
-            <a href="career-detail.html">
-              <div class="job__item">
-                <p class="job__no">03</p>
-                <h3 class="job__title">Product Manager</h3>
-                <h4 class="job__open">(02 Open Roles)</h4>
-                <div class="job__link"><span><i class="fa-solid fa-arrow-right"></i></span></div>
-              </div>
-            </a>
-            <a href="career-detail.html">
-              <div class="job__item">
-                <p class="job__no">04</p>
-                <h3 class="job__title">JavaScript Engineer</h3>
-                <h4 class="job__open">(1 Open Roles)</h4>
-                <div class="job__link"><span><i class="fa-solid fa-arrow-right"></i></span></div>
-              </div>
-            </a>
-            <a href="career-detail.html">
-              <div class="job__item">
-                <p class="job__no">05</p>
-                <h3 class="job__title">Joomla Developer</h3>
-                <h4 class="job__open">(01 Open Roles)</h4>
-                <div class="job__link"><span><i class="fa-solid fa-arrow-right"></i></span></div>
-              </div>
-            </a>
+          <div class="col-xxl-12">
+            <div class="job__list">
+              @php
+                $i = 1;
+              @endphp
+              @foreach ($jobs as $row)
+                <a href="{{ url($row->slug) }}">
+                  <div class="job__item">
+                    <p class="job__no">{{ $i }}</p>
+                    <h3 class="job__title">{{ $row->designation }}</h3>
+                    <h4 class="job__open">({{ $row->no_of_position }} Open Roles)</h4>
+                    <div class="job__link"><span><i class="fa-solid fa-arrow-right"></i></span></div>
+                  </div>
+                </a>
+                @php
+                  $i++;
+                @endphp
+              @endforeach
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  @endif
 
   <section class="career__benefits">
     <div class="container g-0 pt-100">

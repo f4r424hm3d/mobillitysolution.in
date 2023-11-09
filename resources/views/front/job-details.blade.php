@@ -8,7 +8,8 @@
     <div class="container">
       <ul class="woocomerce__single-breadcrumb">
         <li><a href="{{ url('/') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
-        <li>Career</li>
+        <li><a href="{{ url('career') }}">Career <i class="fa-solid fa-chevron-right"></i></a></li>
+        <li>{{ $row->designation }}</li>
       </ul>
     </div>
   </div>
@@ -20,58 +21,27 @@
 
   <section class="job__detail">
     <div class="container g-0">
-
       <div class="row">
         <div class="col-lg-12">
           <div class="job__detail-wrapper">
-            <h2 class="sec-title">UI/UX Designer</h2>
+            <h2 class="sec-title">{{ $row->designation }}</h2>
             <ul class="job__detail-meta">
-              <li><span>No. of Position</span> Gurgaon</li>
-              <li><span>Last Date</span> 15, November 2023</li>
-              <li><span>Job Type</span> Full time (Remote)</li>
-              <li><span>No. of Position</span> 2</li>
-              <li><span>Experience</span> 2+ Year</li>
+              <li><span>Location</span> {{ $row->location }}</li>
+              <li><span>Last Date</span> {{ getFormattedDate($row->last_date, 'd M, Y') }}</li>
+              <li><span>Job Type</span> {{ $row->job_type }}</li>
+              <li><span>No. of Position</span> {{ $row->no_of_position }}</li>
+              <li><span>Experience</span> {{ $row->experience }}</li>
             </ul>
             <div class="job__detail-content">
-              <h2>Roles & Responsibilities:</h2>
-              <p>Mandatory Skills: Expertise in Photoshop, Illustrator, or other visual design, HTML, CSS,
-                JavaScript, and wire-framing tools.</p>
-
-              <h2>Job Description:</h2>
-              <p>Perform all visual design phases from idea to finishing hand-off to engineering Present and
-                protect designs & core deliverables to peers and administrative level stakeholders Conceptualize
-                original site design concepts that bring ease and user friendliness to difficult roadblocks Make
-                user flows, wireframes, process flows, site maps, and storyboards to converse communication and
-                design notions</p>
-              <p>Set up and endorse design guidelines, standards, and best practices.</p>
-
-              <h2>Some Points Show Here</h2>
-              <ul>
-                <li>Support Growth team in expanding customer base within legal</li>
-                <li>Find prospective customer leads via LinkedIn Sales Navigator, industry directories network and
-                  other</li>
-                <li>Qualify prospective customer leads via email, phone, and Linkedin messaging</li>
-                <li>Track and analyze prospective customer pipeline, presenting stats and progress to Growth team
-                </li>
-              </ul>
-
-              <h2>Educational Qualification</h2>
-              <ul>
-                <li>It doesn’t matter where you went to college or what your CGPA was as long as you are smart,
-                  passionate, ready to work hard and have fun.</li>
-              </ul>
-
+              {!! $row->description !!}
             </div>
-
             <div class="job__apply btn_wrapper">
               <a class="wc-btn-primary btn-hover btn-item" href="#apply-position"><span></span> Apply this
                 <br>Position <i class="fa-solid fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
