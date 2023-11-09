@@ -13,42 +13,17 @@
       <div class="swiper woocomerce-active">
         <div class="swiper-wrapper">
 
-          <div class="swiper-slide">
-            <div class="woocomerce__hero-item"
-              style="background-image: url({{ url('web') }}/assets/imgs/slider/1.jpg);"> <span
-                class="woocomerce__hero-rectangle"></span>
-              <div class="woocomerce__hero-content">
-                <h1 class="woocomerce__hero-htitle">Lorem<br> <span>dummy text</span> <br>ipsum</h1>
-                <span class="woocomerce__hero-subtitle">Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.</span>
-                <!--p class="woocomerce__hero-dis">View the full case study of our recent featured and awesome global branding agency that powers </p-->
+          @foreach ($banners as $row)
+            <div class="swiper-slide">
+              <div class="woocomerce__hero-item" style="background-image: url({{ asset($row->banner_path) }});"> <span
+                  class="woocomerce__hero-rectangle"></span>
+                <div class="woocomerce__hero-content">
+                  <h1 class="woocomerce__hero-htitle">{{ $row->heading }}</h1>
+                  <span class="woocomerce__hero-subtitle">{{ $row->shortnote }}</span>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="woocomerce__hero-item"
-              style="background-image: url({{ url('web') }}/assets/imgs/slider/2.jpg);"> <span
-                class="woocomerce__hero-rectangle"></span>
-              <div class="woocomerce__hero-content">
-                <h1 class="woocomerce__hero-htitle">Lorem<br> <span>dummy text</span> <br>ipsum</h1>
-                <span class="woocomerce__hero-subtitle">Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="woocomerce__hero-item"
-              style="background-image: url({{ url('web') }}/assets/imgs/slider/3.jpg);"> <span
-                class="woocomerce__hero-rectangle"></span>
-              <div class="woocomerce__hero-content">
-                <h1 class="woocomerce__hero-htitle">Lorem<br> <span>dummy text</span> <br>ipsum</h1>
-                <span class="woocomerce__hero-subtitle">Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.</span>
-              </div>
-            </div>
-          </div>
+          @endforeach
 
         </div>
         <!-- If we need pagination -->

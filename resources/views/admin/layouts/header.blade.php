@@ -270,6 +270,16 @@
                   <i data-feather="file-text"></i> Upload Files
                 </a>
               </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
+                  <i data-feather="file-text"></i>
+                  <span data-key="t-extra-pages">More</span>
+                  <div class="arrow-down"></div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="topnav-more">
+                  <a href="{{ aurl('home-page-banner') }}" class="dropdown-item">Home Page Banner</a>
+                </div>
+              </li>
             </ul>
           </div>
         </nav>
