@@ -248,6 +248,17 @@
                 </div>
               </li>
               <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
+                  <i data-feather="file-text"></i>
+                  <span data-key="t-extra-pages">Career</span>
+                  <div class="arrow-down"></div>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="topnav-more">
+                  <a href="{{ aurl('job-vacancy') }}" class="dropdown-item">Job Vacancy</a>
+                  <a href="#" class="dropdown-item">Job Request</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="{{ aurl('team') }}" id="topnav-dashboard"
                   role="button" title="Dashboard">
                   <i data-feather="users"></i> Team

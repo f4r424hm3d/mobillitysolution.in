@@ -17,9 +17,13 @@ class CommonController extends Controller
     }
     echo $output;
   }
-  public function changeStatus(Request $request)
+  public function changeStatusOld(Request $request)
   {
     echo $result = DB::table($request->tbl)->where('id', $request->id)->update(['status' => $request->val]);
+  }
+  public function changeStatus(Request $request)
+  {
+    echo $result = DB::table($request->tbl)->where('id', $request->id)->update(['status' => DB::raw('1 - status')]);
   }
   public function updateField(Request $request)
   {
