@@ -50,78 +50,101 @@
       <div class="mb-4">
         <h2 class="sec-title">Join our team & let’s work together</h2>
       </div>
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label class="pb-1">Your Name</label>
-            <input name="name" type="text" class="form-control" placeholder="Enter your name" value=""
-              required="">
+      <form action="{{ url('apply-job') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="pb-1">Your Name</label>
+              <input type="text" class="form-control" placeholder="Write your name" name="name" id="name"
+                value="{{ old('name') }}">
+              @error('name')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label class="pb-1">Your Email</label>
-            <input name="email" type="email" class="form-control" placeholder="Enter Email Address" value=""
-              required="">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="pb-1">Your Email</label>
+              <input type="email" class="form-control" placeholder="example@gmail.com" name="email" id="email"
+                value="{{ old('email') }}">
+              @error('email')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label class="pb-1">Your Mobile No.</label>
-            <input name="mobile" type="number" class="form-control" placeholder="Phone No." value=""
-              required="">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="pb-1">Your Mobile No.</label>
+              <input type="text" class="form-control" placeholder="+66 555 666 888 22" name="mobile" id="mobile"
+                value="{{ old('mobile') }}">
+              @error('mobile')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label class="pb-1">Experience</label>
-            <select name="experience" class="form-control form-select">
-              <option value="">Select your experience</option>
-              <option value="Less than 1 year">Less than 1 year</option>
-              <option value="1-2 year">1-2 year</option>
-              <option value="2-3 year">2-3 year</option>
-              <option value="3-4 year">3-4 year</option>
-              <option value="More than 5">More than 5</option>
-            </select>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="pb-1">Experience</label>
+              <select name="experience" class="form-control form-select">
+                <option value="">Select your experience</option>
+                <option value="Less than 1 year">Less than 1 year</option>
+                <option value="1-2 year">1-2 year</option>
+                <option value="2-3 year">2-3 year</option>
+                <option value="3-4 year">3-4 year</option>
+                <option value="More than 5">More than 5</option>
+              </select>
+              @error('experience')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label class="pb-1">Apply for position</label>
-            <select name="position" class="form-control form-select">
-              <option value="">Select position</option>
-              <option value="2">Website Designer</option>
-              <option value="3">UI/UX Designer</option>
-            </select>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="pb-1">Select Position</label>
+              <select name="position" id="position" class="form-control form-select">
+                <option value="">Select</option>
+                @foreach ($jobs as $row)
+                  <option value="{{ $row->id }}">{{ $row->designation }}</option>
+                @endforeach
+              </select>
+              @error('position')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-6">
-          <div class="form-group">
-            <label class="pb-1">Upload your CV/Resume</label>
-            <input name="resume" type="file" class="form-control" placeholder="Upload you file max 2MB"
-              required="">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label class="pb-1">Upload your CV/Resume</label>
+              <input name="resume" type="file" class="form-control" placeholder="Upload you file max 1MB">
+              @error('resume')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
-        </div>
 
-        <div class="col-12 col-md-12">
-          <div class="form-group">
-            <label class="pb-1">Your Message</label>
-            <textarea name="msg" type="text" class="form-control" placeholder="Enter your message here"></textarea>
+          <div class="col-12 col-md-12">
+            <div class="form-group">
+              <label class="pb-1">Your Message</label>
+              <textarea name="message" id="message" type="text" class="form-control" placeholder="Enter your message here"></textarea>
+              @error('message')
+                <span class="text-danger">{{ $message }}</span>
+              @enderror
+            </div>
           </div>
+
+          <div class="job__apply btn_wrapper">
+            <button class="wc-btn-primary btn-hover btn-item" type="submit"><span></span> Send <br>Now <i
+                class="fa-solid fa-arrow-right"></i></button>
+          </div>
+
         </div>
-
-        <div class="job__apply btn_wrapper">
-          <button class="wc-btn-primary btn-hover btn-item"><span></span> Send <br>Now <i
-              class="fa-solid fa-arrow-right"></i></button>
-        </div>
-
-      </div>
-
+      </form>
     </div>
   </section>
   <!-- Career detail area end -->

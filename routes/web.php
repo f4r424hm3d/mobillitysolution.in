@@ -114,6 +114,7 @@ $jobs = JobVacancy::all();
 foreach ($jobs as $row) {
   Route::get('/' . $row->slug, [CareerFc::class, 'jobDetail']);
 }
+Route::post('apply-job', [CareerFc::class, 'applyJob']);
 
 
 Route::get('/solutions', [SolutionFc::class, 'index']);
