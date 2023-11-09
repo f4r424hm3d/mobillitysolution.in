@@ -255,7 +255,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="topnav-more">
                   <a href="{{ aurl('job-vacancy') }}" class="dropdown-item">Job Vacancy</a>
-                  <a href="#" class="dropdown-item">Job Request</a>
+                  <a href="{{ aurl('job-application') }}" class="dropdown-item">Job Application</a>
                 </div>
               </li>
               <li class="nav-item dropdown">

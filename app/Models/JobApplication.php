@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class JobApplication extends Model
 {
-    use HasFactory;
+  use HasFactory;
+  public function getPosition()
+  {
+    return $this->hasOne(JobVacancy::class, 'id', 'position_id');
+  }
 }

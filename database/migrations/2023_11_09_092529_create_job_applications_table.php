@@ -22,7 +22,7 @@ return new class extends Migration
       $table->text('resume_path')->nullable();
       $table->unsignedBigInteger('position_id')->nullable();
       $table->foreign('position_id')->references('id')->on('job_vacancies')->cascadeOnDelete();
-      $table->boolean('viewed')->default(0);
+      $table->boolean('status')->default(0);
       $table->timestamps();
     });
   }
