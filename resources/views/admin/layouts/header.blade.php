@@ -214,6 +214,12 @@
                 </a>
               </li>
               <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle arrow-none" href="{{ aurl('leads') }}" id="topnav-dashboard"
+                  role="button" title="Dashboard">
+                  <i data-feather="file-text"></i> Leads
+                </a>
+              </li>
+              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
                   <i data-feather="file-text"></i>
                   <span data-key="t-extra-pages">Products</span>

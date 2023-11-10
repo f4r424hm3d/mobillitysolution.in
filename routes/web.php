@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\DynamicPageSeoC;
 use App\Http\Controllers\admin\HomePageBannerC;
 use App\Http\Controllers\admin\JobApplicationC;
 use App\Http\Controllers\admin\JobVacancyC as JV;
+use App\Http\Controllers\admin\LeadC;
 use App\Http\Controllers\admin\ProductC;
 use App\Http\Controllers\admin\ProductCategoryC;
 use App\Http\Controllers\admin\ProductContentC;
@@ -281,6 +282,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::post('/store-ajax', [JobApplicationC::class, 'storeAjax']);
       Route::get('/update/{id}', [JobApplicationC::class, 'index']);
       Route::post('/update/{id}', [JobApplicationC::class, 'update']);
+    });
+    Route::prefix('/leads')->group(function () {
+      Route::get('/', [LeadC::class, 'index']);
+      Route::get('/get-data', [LeadC::class, 'getData']);
+      Route::get('/delete/{id}', [LeadC::class, 'delete']);
+      Route::post('/store-ajax', [LeadC::class, 'storeAjax']);
+      Route::get('/update/{id}', [LeadC::class, 'index']);
+      Route::post('/update/{id}', [LeadC::class, 'update']);
     });
     Route::prefix('/home-page-banner')->group(function () {
       Route::get('/', [HomePageBannerC::class, 'index']);
