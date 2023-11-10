@@ -1,9 +1,14 @@
 <?php
 
-define('TO_EMAIL', 'farazahmad280@gmail.com');
-define('TO_NAME', 'Mohd Faraz');
-define('CC_EMAIL', '4hm3df4r42@gmail.com');
-define('CC_NAME', 'Tutelage Study');
+define('TO_EMAIL', 'studytutelage@gmail.com');
+define('TO_NAME', 'Tutelage Study');
+define('CC_EMAIL', 'amanahlawat1918@gmail.com');
+define('CC_NAME', 'Aman Ahlawat');
+
+// define('TO_EMAIL', 'farazahmad280@gmail.com');
+// define('TO_NAME', 'Mohd Faraz');
+// define('CC_EMAIL', '4hm3df4r42@gmail.com');
+// define('CC_NAME', 'Tutelage Study');
 
 if (!function_exists('printArray')) {
   function printArray($data)
