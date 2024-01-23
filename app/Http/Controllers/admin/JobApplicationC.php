@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class JobApplicationC extends Controller
 {
+  protected $page_route;
   public function __construct()
   {
     $this->page_route = 'job-application';

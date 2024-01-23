@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class JobVacancyC extends Controller
 {
+  protected $page_route;
   public function __construct()
   {
     $this->page_route = 'job-vacancy';
