@@ -66,7 +66,7 @@
       </div>
 
       <div class="row">
-        <div class="portfolio__inner-5">
+        <div class="portfolio__inner-5 col-lg-4">
 
           @foreach ($row->getAllProduct as $pd)
             <div class="portfolio__item-5">

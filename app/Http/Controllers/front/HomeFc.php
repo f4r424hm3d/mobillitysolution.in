@@ -24,4 +24,8 @@ class HomeFc extends Controller
   {
     return view('front.privacy-policy');
   }
+  public function team(Request $request)
+  {
+    return view('front.team');
+  }
 }

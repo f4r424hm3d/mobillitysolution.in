@@ -104,6 +104,7 @@ Route::get('/f/migrate', function () {
 
 /* FRONT ROUTE */
 Route::get('/', [HomeFc::class, 'index']);
+Route::get('team', [HomeFc::class, 'team']);
 Route::get('/what-make-us-different', [HomeFc::class, 'whatMakeUsDifferent']);
 Route::get('/privacy-policy', [HomeFc::class, 'privacyPolicy']);
 Route::get('/about-us', [AboutFc::class, 'index']);
