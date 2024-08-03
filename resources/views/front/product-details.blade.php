@@ -324,55 +324,32 @@
   </section>
 
   <!-- Gallery -->
-  <section class="portfolio__area-5  mt-5">
-    <div class="container-fluid">
-      <div class="row pb-5">
-        <div class="col-lg-12">
-          <div class="sec-title-wrapper">
-            <h3 class="sec-title">Our Gallery</h3>
+  @if ($row->photos->count() > 0)
+    <section class="portfolio__area-5  mt-5">
+      <div class="container-fluid">
+        <div class="row pb-5">
+          <div class="col-lg-12">
+            <div class="sec-title-wrapper">
+              <h3 class="sec-title">Our Gallery</h3>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="gallery">
-        <div class="gallery-item-wrapper">
-          <img class="gallery-item"
-            src="https://www.mobilitysolution.in/uploads/products/adhesive-prosthetic-ear-right_1722507340.jpg"
-            alt="Gallery Image">
+        <div class="gallery">
+          @foreach ($row->photos as $p)
+            <div class="gallery-item-wrapper">
+              <img class="gallery-item" src="{{ asset($p->file_path) }}" alt="{{ $p->title }}">
+            </div>
+          @endforeach
         </div>
-        <div class="gallery-item-wrapper">
-          <img class="gallery-item" src="https://www.mobilitysolution.in/web/assets/imgs/products/home/1.jpg"
-            alt="Gallery Image">
-        </div>
-        <div class="gallery-item-wrapper">
-          <img class="gallery-item"
-            src="https://www.mobilitysolution.in/uploads/products/adhesive-prosthetic-ear-right_1722507340.jpg"
-            alt="Gallery Image">
-        </div>
-        <div class="gallery-item-wrapper">
-          <img class="gallery-item" src="https://www.mobilitysolution.in/web/assets/imgs/products/home/1.jpg"
-            alt="Gallery Image">
-
-        </div>
-        <div class="gallery-item-wrapper">
-          <img class="gallery-item"
-            src="https://www.mobilitysolution.in/uploads/products/adhesive-prosthetic-ear-right_1722507340.jpg"
-            alt="Gallery Image">
-
-        </div>
-        <div class="gallery-item-wrapper">
-          <img class="gallery-item" src="https://www.mobilitysolution.in/web/assets/imgs/products/home/1.jpg"
-            alt="Gallery Image">
-
+        <div id="popup-gallery" class="popup-gallery">
+          <span class="close">&times;</span>
+          <img class="popup-image" id="popup-image" src="">
+          <button class="prev" id="prev-button">&lt;</button>
+          <button class="next" id="next-button">&gt;</button>
         </div>
       </div>
-      <div id="popup-gallery" class="popup-gallery">
-        <span class="close">&times;</span>
-        <img class="popup-image" id="popup-image" src="">
-        <button class="prev" id="prev-button">&lt;</button>
-        <button class="next" id="next-button">&gt;</button>
-      </div>
-    </div>
-  </section>
+    </section>
+  @endif
 
   @if ($relatedProducts->count() > 0)
     <!-- Related Product start -->
