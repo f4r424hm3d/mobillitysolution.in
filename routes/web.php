@@ -18,6 +18,7 @@ use App\Http\Controllers\admin\ProductSubCategoryC;
 use App\Http\Controllers\admin\StaticPageSeoC;
 use App\Http\Controllers\admin\UserC;
 use App\Http\Controllers\admin\ProductCategoryFaqC;
+use App\Http\Controllers\admin\ProductGalleryC;
 use App\Http\Controllers\admin\ProductSubCategoryFaqC;
 use App\Http\Controllers\admin\TeamC;
 use App\Http\Controllers\admin\UploadFilesC;
@@ -227,6 +228,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::get('/{product_id}/', [ProductContentC::class, 'index']);
       Route::get('{product_id}/update/{id}', [ProductContentC::class, 'index']);
       Route::post('{product_id}/update/{id}', [ProductContentC::class, 'update']);
+    });
+    Route::prefix('/product-gallery/')->group(function () {
+      Route::get('/get-data', [ProductGalleryC::class, 'getData']);
+      Route::get('/delete/{id}', [ProductGalleryC::class, 'delete']);
+      Route::post('/store-ajax', [ProductGalleryC::class, 'storeAjax']);
+      Route::get('/{product_id}/', [ProductGalleryC::class, 'index']);
+      Route::get('{product_id}/update/{id}', [ProductGalleryC::class, 'index']);
+      Route::post('{product_id}/update/{id}', [ProductGalleryC::class, 'update']);
     });
     Route::prefix('/authors')->group(function () {
       Route::get('', [AuthorC::class, 'index']);

@@ -14,6 +14,7 @@
             <div class="page-title-right">
               <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"><a href="{{ url('/admin/') }}"><i class="mdi mdi-home-outline"></i></a></li>
+                <li class="breadcrumb-item"><a href="{{ url('/admin/products') }}">{{ $product->product_name }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $page_title }}</li>
               </ol>
             </div>
@@ -40,47 +41,25 @@
                 </span>
               </h4>
             </div>
-            <div class="card-body hide-this" id="tblCDiv">
+            <div class="card-body" id="tblCDiv">
               <form id="{{ $ft == 'add' ? 'dataForm' : 'editForm' }}" {{ $ft == 'edit' ? 'action=' . $url : '' }}
                 class="needs-validation" method="post" enctype="multipart/form-data" novalidate>
                 @csrf
+                <input type="hidden" name="product_id" value="{{ $product_id }}">
                 <div class="row">
-                  <div class="col-md-3 col-sm-12 mb-3">
-                    <x-InputField type="text" label="Enter Product Name" name="product_name" id="product_name"
-                      :ft="$ft" :sd="$sd">
-                    </x-InputField>
-                    <span id="product_name-err" class="text-danger errSpan"></span>
-                  </div>
-                  <div class="col-md-3 col-sm-12 mb-3">
-                    <x-select-field label="Select Category" name="category_id" id="category_id" :ft="$ft"
-                      :sd="$sd" :list="$categories" showv="category_name" savev="id">
-                    </x-select-field>
-                    <span id="category_id-err" class="text-danger errSpan"></span>
-                  </div>
-                  <div class="col-md-3 col-sm-12 mb-3">
-                    <x-SelectField label="Select Sub Category" name="sub_category_id" id="sub_category_id"
-                      :ft="$ft" :sd="$sd" :list="$sub_categories" showv="sub_category_name" savev="id">
-                    </x-SelectField>
-                    <span id="sub_category_id-err" class="text-danger errSpan"></span>
-                  </div>
-                  <div class="col-md-3 col-sm-12 mb-3">
-                    <x-InputField type="file" label="Upload Image" name="thumbnail_name" id="thumbnail_name"
-                      :ft="$ft" :sd="$sd">
-                    </x-InputField>
-                    <span id="thumbnail_name-err" class="text-danger errSpan"></span>
-                  </div>
-
-                  <div class="col-md-12 col-sm-12 mb-3">
-                    <x-TextareaField label="Enter Description" name="description" id="description" :ft="$ft"
+                  <div class="col-md-4 col-sm-12 mb-3">
+                    <x-input-field type="text" label="Enter Title" name="title" id="title" :ft="$ft"
                       :sd="$sd">
-                    </x-TextareaField>
-                    <span id="description-err" class="text-danger errSpan"></span>
+                    </x-input-field>
+                    <span id="title-err" class="text-danger errSpan"></span>
+                  </div>
+                  <div class="col-md-4 col-sm-12 mb-3">
+                    <x-multiple-input-field type="file" label="Upload File" name="files" id="files"
+                      :ft="$ft" :sd="$sd">
+                    </x-multiple-input-field>
+                    <span id="files-err" class="text-danger errSpan"></span>
                   </div>
                 </div>
-                <hr>
-                <!--  SEO INPUT FILED COMPONENT  -->
-                <x-SeoField :ft="$ft" :sd="$sd"></x-SeoField>
-                <!--  SEO INPUT FILED COMPONENT END  -->
                 @if ($ft == ' add')
                   <button type="reset" class="btn btn-sm btn-warning  mr-1"><i class="ti-trash"></i>
                     Reset</button>
@@ -172,6 +151,7 @@
       } else {
         var page = '{{ $page_no }}';
       }
+      var product_id = '{{ $product_id }}';
       return new Promise(function(resolve, reject) {
         //$("#migrateBtn").text('Migrating...');
         setTimeout(() => {
@@ -180,6 +160,7 @@
             method: "GET",
             data: {
               page: page,
+              product_id: product_id,
             },
             success: function(data) {
               $("#trdata").html(data);

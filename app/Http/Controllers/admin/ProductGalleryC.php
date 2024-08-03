@@ -4,24 +4,24 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\ProductContent;
+use App\Models\ProductGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProductContentC extends Controller
+class ProductGalleryC extends Controller
 {
   protected $page_route;
   public function __construct()
   {
-    $this->page_route = 'product-content';
+    $this->page_route = 'product-gallery';
   }
   public function index(Request $request, $product_id, $id = null)
   {
     $product = Product::find($product_id);
     $page_no = $_GET['page'] ?? 1;
-    $rows = ProductContent::where('product_id', $product_id)->get();
+    $rows = ProductGallery::where('product_id', $product_id)->get();
     if ($id != null) {
-      $sd = ProductContent::find($id);
+      $sd = ProductGallery::find($id);
       if (!is_null($sd)) {
         $ft = 'edit';
         $url = url('admin/' . $this->page_route . '/' . $product_id . '/update/' . $id);
@@ -35,17 +35,17 @@ class ProductContentC extends Controller
       $title = 'Add New';
       $sd = '';
     }
-    $page_title = "Product Content";
+    $page_title = "Product Gallery";
     $page_route = $this->page_route;
     $data = compact('rows', 'sd', 'ft', 'title', 'page_title', 'page_route', 'page_no', 'url', 'product_id', 'product');
-    return view('admin.product-content')->with($data);
+    return view('admin.product-gallery')->with($data);
   }
   public function storeAjax(Request $request)
   {
     $validator = Validator::make($request->all(), [
       'product_id' => 'required',
       'title' => 'required',
-      'description' => 'required',
+      'files.*' => 'required|max:5000|mimes:jpg,jpeg,png,gif',
     ]);
 
     if ($validator->fails()) {
@@ -54,20 +54,35 @@ class ProductContentC extends Controller
       ]);
     }
 
-    $field = new ProductContent;
-    $field->product_id = $request['product_id'];
-    $field->title = $request['title'];
-    $field->description = $request['description'];
-    $field->save();
-    return response()->json(['success' => 'Records inserted succesfully.']);
+    foreach ($request->file('files') as $file) {
+      $field = new ProductGallery;
+      $field->product_id = $request['product_id'];
+      $field->title = $request['title'];
+
+      $fileOriginalName = $file->getClientOriginalName();
+      $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
+      $file_name_slug = slugify($fileNameWithoutExtention);
+      $fileExtention = $file->getClientOriginalExtension();
+      $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
+      $move = $file->move('uploads/files/', $file_name);
+
+      if ($move) {
+        $field->file_name = $file_name;
+        $field->file_path = 'uploads/files/' . $file_name;
+        $field->save();
+      }
+    }
+
+    return response()->json(['success' => 'Records inserted successfully.']);
   }
+
   public function delete($id)
   {
     if ($id) {
-      $row = ProductContent::findOrFail($id);
-      //   if ($row->thumbnail_path != null) {
-      //     unlink($row->thumbnail_path);
-      //   }
+      $row = ProductGallery::findOrFail($id);
+      if ($row->file_path != null) {
+        unlink($row->file_path);
+      }
       echo $result = $row->delete();
     }
   }
@@ -77,13 +92,25 @@ class ProductContentC extends Controller
       [
         'product_id' => 'required',
         'title' => 'required',
-        'description' => 'required',
+        'file' => 'nullable|max:5000|mimes:jpg,jpeg,png,gif',
       ]
     );
-    $field = ProductContent::find($id);
+    $field = ProductGallery::find($id);
     $field->product_id = $request['product_id'];
     $field->title = $request['title'];
-    $field->description = $request['description'];
+    if ($request->hasFile('files')) {
+      $fileOriginalName = $request->file('files')->getClientOriginalName();
+      $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
+      $file_name_slug = slugify($fileNameWithoutExtention);
+      $fileExtention = $request->file('files')->getClientOriginalExtension();
+      $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
+      $move = $request->file('files')->move('uploads/files/', $file_name);
+      if ($move) {
+        unlink($field->file_path);
+        $field->file_name = $file_name;
+        $field->file_path = 'uploads/files/' . $file_name;
+      }
+    }
     $field->save();
     session()->flash('smsg', 'Record has been updated successfully.');
     return redirect('admin/' . $this->page_route . '/' . $product_id);
@@ -92,14 +119,14 @@ class ProductContentC extends Controller
   {
     // return $request;
     // die;
-    $rows = ProductContent::where('product_id', $request->product_id)->paginate(10)->withPath('/admin/' . $this->page_route . '/' . $request->product_id);
+    $rows = ProductGallery::where('product_id', $request->product_id)->paginate(10)->withPath('/admin/' . $this->page_route . '/' . $request->product_id);
     $i = 1;
     $output = '<table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
     <thead>
       <tr>
         <th>Sr. No.</th>
         <th>Title</th>
-        <th>Description</th>
+        <th>File</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -109,28 +136,13 @@ class ProductContentC extends Controller
         . $row->id . '">
             <td>' . $i . '</td>
             <td>' . $row->title . '</td>
-            <td>
-              <button type="button" class="btn btn-xs btn-outline-info waves-effect waves-light"
-                data-bs-toggle="modal" data-bs-target="#SeoModalScrollable' . $row->id . '">View</button>
-              <div class="modal fade" id="SeoModalScrollable' . $row->id . '" tabindex="-1" role="dialog"
-                aria-labelledby="SeoModalScrollableTitle' . $row->id . '" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="SeoModalScrollableTitle' . $row->id . '">SEO</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      ' . $row->description . '
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </td>
+            <td>';
+      if ($row->file_path != null) {
+        $output .= '<a target="blank" href="' . asset($row->file_path) . '"><img src="' . asset($row->file_path) . '" height="20" weight="20"></a>';
+      } else {
+        $output .= 'N/A';
+      }
+      $output .= '</td>
             <td>
               <a href="javascript:void()" onclick="DeleteAjax(' . $row->id . ')"
                 class="waves-effect waves-light btn btn-xs btn-outline btn-danger"><i class="fa fa-trash"

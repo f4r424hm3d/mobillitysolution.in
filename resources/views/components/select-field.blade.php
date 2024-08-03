@@ -1,6 +1,6 @@
 <div class="form-group">
   <label>{{ $label }} {!! $required != null ? '<span class="text-danger">*</span>' : '' !!}</label>
-  <select name="{{ $name }}" id="{{ $id }}" class="form-control custom_select2" {{ $required }}>
+  <select name="{{ $name }}" id="{{ $id }}" class="form-control " {{ $required }}>
     <option value="">Select</option>
     @foreach ($list as $row)
       <option value="{{ $row->$savev }}"

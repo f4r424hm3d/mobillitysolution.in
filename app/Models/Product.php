@@ -16,8 +16,12 @@ class Product extends Model
   {
     return $this->hasOne(ProductSubCategory::class, 'id', 'sub_category_id');
   }
-  public function getContents()
+  public function contents()
   {
     return $this->hasMany(ProductContent::class, 'product_id', 'id');
+  }
+  public function photos()
+  {
+    return $this->hasMany(ProductGallery::class, 'product_id', 'id');
   }
 }

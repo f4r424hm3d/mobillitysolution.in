@@ -47,7 +47,6 @@ class ProductC extends Controller
       <tr>
         <th>Sr. No.</th>
         <th>Product</th>
-        <th>Sub Category</th>
         <th>Category</th>
         <th>Thumbnail</th>
         <th>Content</th>
@@ -61,12 +60,11 @@ class ProductC extends Controller
         $output .= '<tr id="row' . $row->id . '">
       <td>' . $i . '</td>
       <td>' . $row->product_name . '</td>
-      <td>' . $row->getSubCategory->sub_category_name . '</td>
-      <td>' . $row->getCategory->category_name . '</td>
+      <td> <b>Category</b> :' . $row->getCategory->category_name . '<br>  <b>Sub Category</b> :' . $row->getSubCategory->sub_category_name . '</td>
       <td>';
 
         if ($row->thumbnail_path != null) {
-          $output .= '<img src="' . asset($row->thumbnail_path) . '" height="40" weight="40">';
+          $output .= '<img src="' . asset($row->thumbnail_path) . '" height="20" weight="20">';
         } else {
           $output .= 'N/A';
         }
@@ -142,8 +140,12 @@ class ProductC extends Controller
                       <i class="fa fa-edit" aria-hidden="true"></i>
                     </a>
         <a href="' . url("admin/product-content/" . $row->id) . '"
-                      class="waves-effect waves-light btn btn-xs btn-outline btn-info">
-                      Content
+                      class="waves-effect waves-light btn btn-xs btn-outline-info">
+                      Content <span class="badge bg-primary">' . $row->contents->count() . '</span>
+                    </a>
+        <a href="' . url("admin/product-gallery/" . $row->id) . '"
+                      class="waves-effect waves-light btn btn-xs btn-outline-info">
+                      Gallery <span class="badge bg-primary">' . $row->photos->count() . '</span>
                     </a>
       </td>
     </tr>';

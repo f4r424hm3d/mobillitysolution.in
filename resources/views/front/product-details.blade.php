@@ -295,7 +295,7 @@
 
               <div class="woocomerce__single-varitions">
                 <div class="accordion" id="accordionExample">
-                  @foreach ($row->getContents as $pc)
+                  @foreach ($row->contents as $pc)
                     <div class="accordion-item">
                       <div class="accordion-header" id="headingOne{{ $pc->id }}">
                         <div class="accordion-button collapsed bg-light" role="contentinfo" data-bs-toggle="collapse"
