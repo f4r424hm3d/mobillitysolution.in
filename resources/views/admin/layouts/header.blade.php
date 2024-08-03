@@ -284,6 +284,14 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="topnav-more">
                   <a href="{{ aurl('home-page-banner') }}" class="dropdown-item">Home Page Banner</a>
+                  <a class="dropdown-item dropdown-toggle arrow-none" href="{{ aurl('employees') }}"
+                    id="topnav-auth" role="button">
+                    <span data-key="t-authentication">Employees</span>
+                  </a>
+                  <a class="dropdown-item dropdown-toggle arrow-none" href="{{ aurl('employee-statuses') }}"
+                    id="topnav-auth" role="button">
+                    <span data-key="t-authentication">Employees Status</span>
+                  </a>
                 </div>
               </li>
             </ul>

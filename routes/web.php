@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AuthorC;
 use App\Http\Controllers\admin\BlogC;
 use App\Http\Controllers\admin\BlogCategoryC;
 use App\Http\Controllers\admin\DynamicPageSeoC;
+use App\Http\Controllers\admin\EmployeeStatusC;
 use App\Http\Controllers\admin\HomePageBannerC;
 use App\Http\Controllers\admin\JobApplicationC;
 use App\Http\Controllers\admin\JobVacancyC as JV;
@@ -306,6 +307,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::get('/delete/{id}', [UserC::class, 'delete']);
       Route::get('/update/{id}', [UserC::class, 'index']);
       Route::post('/update/{id}', [UserC::class, 'update']);
+    });
+    Route::prefix('/employee-statuses')->group(function () {
+      Route::get('', [EmployeeStatusC::class, 'index']);
+      Route::post('/store', [EmployeeStatusC::class, 'store']);
+      Route::get('/get-data', [EmployeeStatusC::class, 'getData']);
+      Route::get('/delete/{id}', [EmployeeStatusC::class, 'delete']);
+      Route::get('/update/{id}', [EmployeeStatusC::class, 'index']);
+      Route::post('/update/{id}', [EmployeeStatusC::class, 'update']);
     });
   });
 });
