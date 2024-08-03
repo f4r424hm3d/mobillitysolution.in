@@ -81,7 +81,7 @@
       <div class="row reset-grid">
 
         @foreach ($row->getAllSubCategory as $sc)
-          <div class="col-lg-6">
+          <div class="col-lg-4">
             <article class="blog__item">
               <div class="blog__img-wrapper">
                 <div class="img-box">

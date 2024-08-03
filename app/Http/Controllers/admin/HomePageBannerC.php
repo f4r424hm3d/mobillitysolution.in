@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class HomePageBannerC extends Controller
 {
+  protected $page_route;
   public function __construct()
   {
     $this->page_route = 'home-page-banner';
@@ -140,7 +141,7 @@ class HomePageBannerC extends Controller
       [
         'heading' => 'required',
         'shortnote' => 'required',
-        'banner' => 'required||max:5000|mimes:jpg,jpeg,png,gif,webp',
+        'banner' => 'nullable||max:5000|mimes:jpg,jpeg,png,gif,webp',
       ]
     );
     $field = HomePageBanner::find($id);

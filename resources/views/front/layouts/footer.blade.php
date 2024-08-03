@@ -26,7 +26,7 @@
       <p class="woocomerce__footer-dis">Mayfield Garden, B-16 Ground Floor, Sector – 50, Gurgaon, Haryana, India
       </p>
       <a class="woocomerce__footer-mail" href="mailto:info@mobillitysolution.in">info@mobillitysolution.in</a>
-      <a class="woocomerce__footer-phone" href="callTo:25487567744">+2 574 - 328 - 301</a>
+      <a class="woocomerce__footer-phone" href="tell:+919910344331">+91-9910 344 331</a>
     </div>
     @php
       use App\Models\ProductCategory;
