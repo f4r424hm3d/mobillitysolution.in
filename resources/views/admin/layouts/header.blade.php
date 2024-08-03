@@ -208,20 +208,14 @@
           <div class="collapse navbar-collapse" id="topnav-menu-content">
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle arrow-none" href="{{ url('admin') }}" id="topnav-dashboard"
-                  role="button">
-                  <i data-feather="home"></i><span data-key="t-dashboards">Dashboard</span>
-                </a>
-              </li>
-              <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="{{ aurl('leads') }}" id="topnav-dashboard"
                   role="button" title="Dashboard">
-                  <i data-feather="file-text"></i> Leads
+                  Leads
                 </a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
-                  <i data-feather="file-text"></i>
+
                   <span data-key="t-extra-pages">Products</span>
                   <div class="arrow-down"></div>
                 </a>
@@ -233,7 +227,7 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
-                  <i data-feather="file-text"></i>
+
                   <span data-key="t-extra-pages">Blog</span>
                   <div class="arrow-down"></div>
                 </a>
@@ -244,7 +238,7 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
-                  <i data-feather="file-text"></i>
+
                   <span data-key="t-extra-pages">Seo</span>
                   <div class="arrow-down"></div>
                 </a>
@@ -255,7 +249,7 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
-                  <i data-feather="file-text"></i>
+
                   <span data-key="t-extra-pages">Career</span>
                   <div class="arrow-down"></div>
                 </a>
@@ -267,18 +261,18 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="{{ aurl('team') }}" id="topnav-dashboard"
                   role="button" title="Dashboard">
-                  <i data-feather="users"></i> Team
+                  Team
                 </a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="{{ aurl('upload-files') }}"
                   id="topnav-dashboard" role="button" title="Dashboard">
-                  <i data-feather="file-text"></i> Upload Files
+                  Upload Files
                 </a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
-                  <i data-feather="file-text"></i>
+
                   <span data-key="t-extra-pages">More</span>
                   <div class="arrow-down"></div>
                 </a>
