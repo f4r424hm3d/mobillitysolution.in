@@ -215,11 +215,11 @@ Route::middleware(['adminLoggedIn'])->group(function () {
     });
     Route::prefix('/products')->group(function () {
       Route::get('', [ProductC::class, 'index']);
-      Route::get('get-data', [ProductC::class, 'getData']);
       Route::get('/delete/{id}', [ProductC::class, 'delete']);
       Route::get('/update/{id}', [ProductC::class, 'index']);
       Route::post('/update/{id}', [ProductC::class, 'update']);
-      Route::post('/store-ajax', [ProductC::class, 'storeAjax']);
+      Route::post('/store', [ProductC::class, 'store']);
+      Route::get('/get-sub-category-by-category', [ProductC::class, 'getSubCategoryByCategory']);
     });
     Route::prefix('/product-content/')->group(function () {
       Route::get('/get-data', [ProductContentC::class, 'getData']);

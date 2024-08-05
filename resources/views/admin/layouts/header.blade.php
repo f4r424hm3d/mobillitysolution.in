@@ -67,6 +67,14 @@
       text-align: justify;
       text-justify: inter-word;
     }
+
+    .setBtn {
+      margin-top: 31px;
+    }
+
+    .card {
+      border: 1px solid #6d70738f !important;
+    }
   </style>
 </head>
 

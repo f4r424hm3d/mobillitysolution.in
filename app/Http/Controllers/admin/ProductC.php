@@ -11,12 +11,45 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductC extends Controller
 {
-  public function index($id = null)
+  public function index(Request $request, $id = null)
   {
     $categories = ProductCategory::all();
     $sub_categories = ProductSubCategory::all();
+    $limit_per_page = $request->limit_per_page ?? 10;
+    $order_by = $request->order_by ?? 'product_name';
+    $order_in = $request->order_in ?? 'ASC';
     $page_no = $_GET['page'] ?? 1;
-    $rows = Product::get();
+
+    $filterApplied = false;
+    $rows = Product::orderBy($order_by, $order_in);
+    if ($request->has('search') && $request->search != '') {
+      $rows = $rows->where('product_name', 'like', '%' . $request->search . '%');
+    } else {
+      if ($request->has('category') && $request->category != '') {
+        $rows = $rows->Where('category_id', $request->category);
+        $filterApplied = true;
+      }
+      if ($request->has('sub_category') && $request->sub_category != '') {
+        $rows = $rows->Where('sub_category_id', $request->sub_category);
+        $filterApplied = true;
+      }
+    }
+    $rows = $rows->paginate($limit_per_page)->withQueryString();
+    $cp = $rows->currentPage();
+    $pp = $rows->perPage();
+    $i = ($cp - 1) * $pp + 1;
+
+    $lpp = ['10', '20', '50'];
+    $orderColumns = ['Name' => 'name', 'Date' => 'created_at'];
+
+    $filterCategories = Product::select('category_id')->groupBy('category_id')->orderBy('category_id')->get();
+
+    $filterSubCategories = Product::select('sub_category_id')->groupBy('sub_category_id')->orderBy('sub_category_id')->where('sub_category_id', '!=', '');
+    if ($request->has('category') && $request->category != '') {
+      $filterSubCategories = $filterSubCategories->where('category_id', $request->category);
+    }
+    $filterSubCategories = $filterSubCategories->get();
+
     if ($id != null) {
       $sd = Product::find($id);
       if (!is_null($sd)) {
@@ -34,145 +67,19 @@ class ProductC extends Controller
     }
     $page_title = "Products";
     $page_route = "products";
-    $data = compact('rows', 'sd', 'ft', 'url', 'title', 'page_title', 'page_route', 'page_no', 'categories', 'sub_categories');
+    $data = compact('rows', 'sd', 'ft', 'url', 'title', 'i', 'page_title', 'page_route', 'page_no', 'categories', 'sub_categories', 'filterApplied', 'limit_per_page', 'order_by', 'order_in', 'lpp', 'orderColumns', 'filterCategories', 'filterSubCategories');
     return view('admin.products')->with($data);
   }
-  public function getData(Request $request)
+  public function store(Request $request)
   {
-    $rows = Product::where('id', '!=', '0');
-    $rows = $rows->paginate(10)->withPath('/admin/products/');
-    $i = 1;
-    $output = '<table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
-    <thead>
-      <tr>
-        <th>Sr. No.</th>
-        <th>Product</th>
-        <th>Category</th>
-        <th>Thumbnail</th>
-        <th>Content</th>
-        <th>SEO</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>';
-    if ($rows->count() > 0) {
-      foreach ($rows as $row) {
-        $output .= '<tr id="row' . $row->id . '">
-      <td>' . $i . '</td>
-      <td>' . $row->product_name . '</td>
-      <td> <b>Category</b> :' . $row->getCategory->category_name . '<br>  <b>Sub Category</b> :' . $row->getSubCategory->sub_category_name . '</td>
-      <td>';
-
-        if ($row->thumbnail_path != null) {
-          $output .= '<img src="' . asset($row->thumbnail_path) . '" height="20" weight="20">';
-        } else {
-          $output .= 'N/A';
-        }
-
-        $output .= '</td><td>';
-
-        if ($row->description != null) {
-          $output .= '<button type="button" class="btn btn-xs btn-outline-info waves-effect waves-light"
-                      data-bs-toggle="modal" data-bs-target="#ContModalScrollable' . $row->id . '">View</button>
-                    <div class="modal fade" id="ContModalScrollable' . $row->id . '" tabindex="-1" role="dialog"
-                      aria-labelledby="ConModalScrollableTitle' . $row->id . '" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="ConModalScrollableTitle' . $row->id . '">
-                              Content
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <h2>Description</h2>
-                            ' . $row->description . ' <br>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>';
-        } else {
-          $output .= 'N/A';
-        }
-
-        $output .= '</td><td>';
-
-        if ($row->meta_title != null) {
-          $output .= '<button type="button" class="btn btn-xs btn-outline-info waves-effect waves-light"
-                      data-bs-toggle="modal" data-bs-target="#SeoModalScrollable' . $row->id . '">View</button>
-                    <div class="modal fade" id="SeoModalScrollable' . $row->id . '" tabindex="-1" role="dialog"
-                      aria-labelledby="SeoModalScrollableTitle' . $row->id . '" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="SeoModalScrollableTitle' . $row->id . '">
-                              SEO
-                            </h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            ' . $row->meta_title . '<br>
-                            ' . $row->meta_keyword . ' <br>
-                            ' . $row->meta_description . ' <br>
-                            ' . $row->page_content . ' <br>
-                            ' . $row->seo_rating . '
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>';
-        } else {
-          $output .= 'N/A';
-        }
-
-        $output .= '</td><td>
-        <a href="javascript:void()" onclick="DeleteAjax(' . $row->id . ')"
-          class="waves-effect waves-light btn btn-xs btn-outline btn-danger">
-          <i class="fa fa-trash" aria-hidden="true"></i>
-        </a>
-        <a href="' . url("admin/products/update/" . $row->id) . '"
-                      class="waves-effect waves-light btn btn-xs btn-outline btn-info">
-                      <i class="fa fa-edit" aria-hidden="true"></i>
-                    </a>
-        <a href="' . url("admin/product-content/" . $row->id) . '"
-                      class="waves-effect waves-light btn btn-xs btn-outline-info">
-                      Content <span class="badge bg-primary">' . $row->contents->count() . '</span>
-                    </a>
-        <a href="' . url("admin/product-gallery/" . $row->id) . '"
-                      class="waves-effect waves-light btn btn-xs btn-outline-info">
-                      Gallery <span class="badge bg-primary">' . $row->photos->count() . '</span>
-                    </a>
-      </td>
-    </tr>';
-        $i++;
-      }
-    } else {
-      $output .= '<tr><td colspan="8"><center>No data found</center></td></tr>';
-    }
-    $output .= '</tbody></table>';
-    $output .= '<div>' . $rows->links('pagination::bootstrap-5') . '</div>';
-    return $output;
-  }
-  public function storeAjax(Request $request)
-  {
-    $validator = Validator::make($request->all(), [
-      'product_name' => 'required|unique:products,product_name',
-      'category_id' => 'required',
-      'sub_category_id' => 'required',
-      'thumbnail' => 'nullable|max:5000|mimes:jpg,jpeg,png,gif,webp',
-    ]);
-
-    if ($validator->fails()) {
-
-      return response()->json([
-        'error' => $validator->errors(),
-      ]);
-    }
+    $request->validate(
+      [
+        'product_name' => 'required|unique:products,product_name',
+        'category_id' => 'required',
+        'sub_category_id' => 'required',
+        'thumbnail' => 'nullable|max:5000|mimes:jpg,jpeg,png,gif,webp',
+      ]
+    );
 
     $field = new Product;
     if ($request->hasFile('thumbnail_name')) {
@@ -199,7 +106,8 @@ class ProductC extends Controller
     $field->page_content = $request['page_content'];
     $field->seo_rating = $request['seo_rating'];
     $field->save();
-    return response()->json(['success' => 'Record hase been added succesfully.']);
+    session()->flash('smsg', 'Record hase been added succesfully.');
+    return redirect('admin/products');
   }
   public function delete($id)
   {
@@ -230,7 +138,7 @@ class ProductC extends Controller
       $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
       $move = $request->file('thumbnail_name')->move('uploads/products/', $file_name);
       if ($move) {
-        if ($field->thumbnail_path != null) {
+        if ($field->thumbnail_path != null && file_exists($field->thumbnail_path)) {
           unlink($field->thumbnail_path);
         }
         $field->thumbnail_name = $file_name;
@@ -251,5 +159,15 @@ class ProductC extends Controller
     $field->save();
     session()->flash('smsg', 'Record has been updated successfully.');
     return redirect('admin/products');
+  }
+  public function getSubCategoryByCategory(Request $request)
+  {
+    //echo $id;
+    $field = Product::select('sub_category_id')->groupBy('sub_category_id')->orderBy('sub_category_id')->where('category_id', $request['category_id'])->get();
+    $output = '<option value="">Select Sub Category</option>';
+    foreach ($field as $row) {
+      $output .= '<option value="' . $row->sub_category_id . '">' . $row->getSubCategory->sub_category_name . '</option>';
+    }
+    echo $output;
   }
 }
