@@ -73,12 +73,8 @@
               <ul>
                 <li>Name : {{ $name }}</li>
                 <li>Email : {{ $email }}</li>
-                <li>Mobile : {{ $mobile }}</li>
-                <li>Category : {{ $category }}</li>
-                <li>Sub Category : {{ $sub_category }}</li>
-                @if ($inquiry_message)
-                  <li>Message : {{ $inquiry_message }}</li>
-                @endif
+                <li>Mobile : {{ $country_code }} {{ $mobile }}</li>
+                <li>Product : {{ $product }}</li>
               </ul>
               </p>
             </td>

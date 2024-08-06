@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class JobVacancy extends Model
 {
-    use HasFactory;
+  use HasFactory;
+  public function scopeActive($query)
+  {
+    return $query->where('status', 1);
+  }
 }

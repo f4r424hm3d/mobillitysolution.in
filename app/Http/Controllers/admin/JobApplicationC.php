@@ -51,6 +51,7 @@ class JobApplicationC extends Controller
         <th>Experience</th>
         <th>Message</th>
         <th>Date</th>
+        <th>Resume/CV</th>
         <th>Status</th>
         <th>Action</th>
       </tr>
@@ -97,6 +98,7 @@ class JobApplicationC extends Controller
 
         $output .= '</td>
         <td>' . getFormattedDate($row->created_at, 'd M, Y') . '</td>
+        <td><a href="' . asset($row->resume_path) . '" target="_blank">view</a></td>
       <td>
         <span class="badge bg-' . $class . '" onclick="changeStatus(' . $row->id . ')">' . $status . '</span>
       </td>

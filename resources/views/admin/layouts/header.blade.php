@@ -253,11 +253,11 @@
                 <div class="dropdown-menu" aria-labelledby="topnav-more">
                   <a href="{{ aurl('static-page-seo') }}" class="dropdown-item">Static Page Seo</a>
                   <a href="{{ aurl('dynamic-page-seo') }}" class="dropdown-item">Dynamic Page Seo</a>
+                  <a href="{{ aurl('default-og-image') }}" class="dropdown-item">Default OG Image</a>
                 </div>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle arrow-none" href="#" id="topnav-more" role="button">
-
                   <span data-key="t-extra-pages">Career</span>
                   <div class="arrow-down"></div>
                 </a>

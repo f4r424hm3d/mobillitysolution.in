@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AdminLogin;
 use App\Http\Controllers\admin\AuthorC;
 use App\Http\Controllers\admin\BlogC;
 use App\Http\Controllers\admin\BlogCategoryC;
+use App\Http\Controllers\admin\DefaultOgImageC;
 use App\Http\Controllers\admin\DynamicPageSeoC;
 use App\Http\Controllers\admin\EmployeeStatusC;
 use App\Http\Controllers\admin\HomePageBannerC;
@@ -23,13 +24,15 @@ use App\Http\Controllers\admin\ProductSubCategoryFaqC;
 use App\Http\Controllers\admin\TeamC;
 use App\Http\Controllers\admin\UploadFilesC;
 use App\Http\Controllers\CommonController;
-use App\Http\Controllers\old\AboutFc;
-use App\Http\Controllers\old\BlogFc;
-use App\Http\Controllers\old\CareerFc;
-use App\Http\Controllers\old\ContactFc;
-use App\Http\Controllers\old\HomeFc;
-use App\Http\Controllers\old\InquiryController;
-use App\Http\Controllers\old\SolutionFc;
+use App\Http\Controllers\front\AboutFc;
+use App\Http\Controllers\front\AjaxFc;
+use App\Http\Controllers\front\BlogFc;
+use App\Http\Controllers\front\CareerFc;
+use App\Http\Controllers\front\ContactFc;
+use App\Http\Controllers\front\HomeFc;
+use App\Http\Controllers\front\InquiryController;
+use App\Http\Controllers\front\SolutionFc;
+use App\Http\Controllers\front\ThankYou;
 use App\Models\Blog;
 use App\Models\JobVacancy;
 use App\Models\Product;
@@ -105,53 +108,41 @@ Route::get('/f/migrate', function () {
 });
 
 /* FRONT ROUTE */
+Route::get('/', [HomeFc::class, 'index']);
+Route::get('/about-us', [AboutFc::class, 'index']);
+Route::get('/what-make-us-different', [AboutFc::class, 'whatMakeUsDifferent']);
+Route::get('team', [HomeFc::class, 'team']);
+Route::get('/privacy-policy', [HomeFc::class, 'privacyPolicy']);
+Route::get('/contact-us', [ContactFc::class, 'index']);
+Route::post('/contact', [ContactFc::class, 'submitInquiry']);
+Route::get('/enquiry', [InquiryController::class, 'index']);
+Route::post('/enquiry', [InquiryController::class, 'store']);
+Route::get('/career', [CareerFc::class, 'index']);
+Route::post('/career/apply', [CareerFc::class, 'apply']);
 
 
+Route::get('/thank-you', [ThankYou::class, 'index']);
 
+Route::get('/solutions', [SolutionFc::class, 'index']);
+$cat = ProductCategory::all();
+foreach ($cat as $row) {
+  Route::get('/' . $row->category_slug, [SolutionFc::class, 'catDetail']);
+}
+$subcat = ProductSubCategory::all();
+foreach ($subcat as $row) {
+  Route::get('/' . $row->sub_category_slug, [SolutionFc::class, 'subDetail']);
+}
+$prod = Product::all();
+foreach ($prod as $row) {
+  Route::get('/' . $row->product_slug, [SolutionFc::class, 'prodDetail']);
+}
 
-Route::prefix('old/')->group(function () {
-  Route::get('/', [HomeFc::class, 'index']);
-  Route::get('team', [HomeFc::class, 'team']);
-  Route::get('/what-make-us-different', [HomeFc::class, 'whatMakeUsDifferent']);
-  Route::get('/privacy-policy', [HomeFc::class, 'privacyPolicy']);
-  Route::get('/about-us', [AboutFc::class, 'index']);
-  Route::get('/contact-us', [ContactFc::class, 'index']);
-  Route::get('/enquiry', [ContactFc::class, 'enquiry']);
-  Route::get('/thank-you', [ContactFc::class, 'thankYou']);
-
-
-  Route::get('/career', [CareerFc::class, 'index']);
-  $jobs = JobVacancy::all();
-  foreach ($jobs as $row) {
-    Route::get('/' . $row->slug, [CareerFc::class, 'jobDetail']);
-  }
-  Route::post('apply-job', [CareerFc::class, 'applyJob']);
-
-
-  Route::get('/solutions', [SolutionFc::class, 'index']);
-  $cat = ProductCategory::all();
-  foreach ($cat as $row) {
-    Route::get('/' . $row->category_slug, [SolutionFc::class, 'catDetail']);
-  }
-  $subcat = ProductSubCategory::all();
-  foreach ($subcat as $row) {
-    Route::get('/' . $row->sub_category_slug, [SolutionFc::class, 'subDetail']);
-  }
-  $prod = Product::all();
-  foreach ($prod as $row) {
-    Route::get('/' . $row->product_slug, [SolutionFc::class, 'prodDetail']);
-  }
-
-  Route::get('/news', [BlogFc::class, 'index']);
-  Route::get('/news/{slug}', [BlogFc::class, 'blogByCategory']);
-  $blogs = Blog::all();
-  foreach ($blogs as $row) {
-    Route::get('/' . $row->slug, [BlogFc::class, 'blogdetail']);
-  }
-
-  Route::post('inquiry/contact-us', [InquiryController::class, 'submitContactUs']);
-  Route::post('inquiry/enquiry', [InquiryController::class, 'enquiry']);
-});
+Route::get('/articles', [BlogFc::class, 'index']);
+Route::get('/articles/{slug}', [BlogFc::class, 'blogByCategory']);
+$blogs = Blog::all();
+foreach ($blogs as $row) {
+  Route::get('/' . $row->slug, [BlogFc::class, 'blogdetail']);
+}
 
 
 /* ADMIN ROUTES BEFORE LOGIN */
@@ -268,6 +259,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::post('/update/{id}', [DynamicPageSeoC::class, 'update']);
       Route::post('/store-ajax', [DynamicPageSeoC::class, 'storeAjax']);
     });
+    Route::prefix('/default-og-image')->group(function () {
+      Route::get('/', [DefaultOgImageC::class, 'index']);
+      Route::get('add/', [DefaultOgImageC::class, 'index']);
+      Route::post('/store/', [DefaultOgImageC::class, 'store']);
+      Route::get('/delete/{id}/', [DefaultOgImageC::class, 'delete']);
+      Route::get('/update/{id}/', [DefaultOgImageC::class, 'index']);
+      Route::post('/update/{id}/', [DefaultOgImageC::class, 'update']);
+    });
     Route::prefix('/upload-files')->group(function () {
       Route::get('/', [UploadFilesC::class, 'index']);
       Route::get('/get-data', [UploadFilesC::class, 'getData']);
@@ -333,6 +332,11 @@ Route::middleware(['adminLoggedIn'])->group(function () {
     });
   });
 });
+
+// web.php
+Route::get('/get/subcategories', [AjaxFc::class, 'getSubCategories']);
+Route::get('/get/products', [AjaxFc::class, 'getProducts']);
+
 
 Route::prefix('common')->group(function () {
   Route::get('/change-status', [CommonController::class, 'changeStatus']);

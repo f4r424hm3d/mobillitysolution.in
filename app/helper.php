@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 define('TO_EMAIL', 'studytutelage@gmail.com');
 define('TO_NAME', 'Tutelage Study');
 define('CC_EMAIL', 'amanahlawat1918@gmail.com');
@@ -107,5 +109,34 @@ if (!function_exists('checkOddOrEven')) {
       $result = "odd";
     }
     return $result;
+  }
+}
+if (!function_exists('generateMathQuestion')) {
+  function generateMathQuestion()
+  {
+    $num1 = rand(1, 10);
+    $num2 = rand(1, 10);
+    $operator = ['+', '-', '*'][rand(0, 2)];
+
+    $questionText = "$num1 $operator $num2";
+    $answer = eval("return $num1 $operator $num2;");
+
+    return [
+      'text' => $questionText,
+      'answer' => $answer,
+    ];
+  }
+}
+if (!function_exists('getISOFormatTime')) {
+  /**
+   * Get the ISO 8601 formatted time.
+   *
+   * @param  string  $time
+   * @return string
+   */
+  function getISOFormatTime($time)
+  {
+    $time = Carbon::parse($time);
+    return $time->format('Y-m-d\TH:i:sP');
   }
 }

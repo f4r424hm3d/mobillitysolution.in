@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers\front;
+
+use App\Http\Controllers\Controller;
+use App\Models\Lead;
+use App\Models\ProductCategory;
+use Illuminate\Http\Request;
+use App\Rules\MathCaptchaValidationRule;
+use Illuminate\Support\Facades\Mail;
+
+class ContactFc extends Controller
+{
+  public function index(Request $request)
+  {
+    $question = generateMathQuestion();
+    //printArray($question);
+    session(['captcha_answer' => $question['answer']]);
+    $data = compact('question');
+    return view('front.contact')->with($data);
+  }
+  public function submitInquiry(Request $request)
+  {
+    // printArray($request->toArray());
+    // die;
+    $request->validate(
+      [
+        'captcha_answer' => ['required', 'numeric', new MathCaptchaValidationRule()],
+        'name' => 'required',
+        'source' => 'required',
+        'source_path' => 'required',
+        'email' => 'required|email',
+        'mobile' => 'required|numeric',
+        'message' => [
+          'required',
+          'string',
+          'max:500', // You can adjust the max length as needed
+          'regex:/^[a-zA-Z0-9\s!@#$%^&*(),.?:"{}|<>]+$/',
+        ],
+      ]
+    );
+    $field = new Lead();
+    $field->name = $request['name'];
+    $field->email = $request['email'];
+    $field->mobile = $request['mobile'];
+    $field->message = $request['message'];
+    $field->source =  $request['source'];
+    $field->source_path =  $request['source_path'];
+    $field->save();
+    session()->flash('smsg', 'Your inquiry has been submitted succesfully. We will contact you soon.');
+    return redirect($request->source_path);
+
+    $emaildata = [
+      'name' => $request['name'],
+      'email' => $request['email'],
+      'msg' => $request['message'],
+    ];
+    $dd = ['to' => $request['email'], 'to_name' => $request['name'], 'subject' => 'Inquiry'];
+
+    Mail::send(
+      'mails.inquiry-reply',
+      $emaildata,
+      function ($message) use ($dd) {
+        $message->to($dd['to'], $dd['to_name']);
+        $message->priority(1);
+      }
+    );
+
+    $emaildata2 = [
+      'name' => $request['name'],
+      'email' => $request['email'],
+      'msg' => $request['message'],
+    ];
+
+    $dd2 = ['to' => TO_EMAIL, 'cc' => CC_EMAIL, 'to_name' => TO_NAME, 'cc_name' => CC_NAME, 'subject' => 'New Inquiry'];
+
+    Mail::send(
+      'mails.inquiry-mail-to-team',
+      $emaildata2,
+      function ($message) use ($dd2) {
+        $message->to($dd2['to'], $dd2['to_name']);
+        $message->cc($dd2['cc'], $dd2['cc_name']);
+        $message->subject($dd2['subject']);
+        $message->priority(1);
+      }
+    );
+  }
+}
