@@ -248,11 +248,12 @@
       <ul class="woocomerce__single-breadcrumb">
         <li><a href="{{ url('old') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
         <li><a href="{{ url('old/solutions') }}">Solutions <i class="fa-solid fa-chevron-right"></i></a></li>
-        <li><a href="{{ url($row->getCategory->category_slug) }}">{{ $row->getCategory->category_name }} <i
+        <li><a href="{{ url('old/' . $row->getCategory->category_slug) }}">{{ $row->getCategory->category_name }} <i
               class="fa-solid fa-chevron-right"></i></a>
         </li>
-        <li><a href="{{ url($row->getSubCategory->sub_category_slug) }}">{{ $row->getSubCategory->sub_category_name }} <i
-              class="fa-solid fa-chevron-right"></i></a>
+        <li><a
+            href="{{ url('old/' . $row->getSubCategory->sub_category_slug) }}">{{ $row->getSubCategory->sub_category_name }}
+            <i class="fa-solid fa-chevron-right"></i></a>
         </li>
         <li>{{ $row->product_name }}</li>
       </ul>
@@ -377,7 +378,7 @@
                 <div class="portfolio__content-5">
                   {{-- <h2 class="portfolio__name-5">Hand prosthetics</h2> --}}
                   <h3 class="portfolio__title-5 mb-2">{{ $row->product_name }}</h3>
-                  <a href="{{ url($row->product_slug) }}" class="blog__btn">View Product Details <span><i
+                  <a href="{{ url('old/' . $row->product_slug) }}" class="blog__btn">View Product Details <span><i
                         class="fa-solid fa-arrow-right"></i></span></a>
                 </div>
                 </a>

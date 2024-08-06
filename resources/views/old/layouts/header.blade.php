@@ -86,10 +86,11 @@
               <li><a href="{{ url('old/solutions') }}">Solutions</a>
                 <ul>
                   @foreach ($categories as $cat)
-                    <li><a href="{{ url($cat->category_slug) }}">{{ $cat->category_name }}</a>
+                    <li><a href="{{ url('old/' . $cat->category_slug) }}">{{ $cat->category_name }}</a>
                       <ul>
                         @foreach ($cat->getAllSubCategory as $subcat)
-                          <li><a href="{{ url($subcat->sub_category_slug) }}">{{ $subcat->sub_category_name }}</a>
+                          <li><a
+                              href="{{ url('old/' . $subcat->sub_category_slug) }}">{{ $subcat->sub_category_name }}</a>
                         @endforeach
                       </ul>
                     </li>

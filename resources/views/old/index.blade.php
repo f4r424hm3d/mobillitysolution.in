@@ -343,7 +343,7 @@
                   <h5>
                     <div class="blog__title-3">{{ $row->title }}</div>
                   </h5>
-                  <a href="{{ url($row->slug) }}" class="blog__btn">Expolore Now <span><i
+                  <a href="{{ url('old/' . $row->slug) }}" class="blog__btn">Expolore Now <span><i
                         class="fa-solid fa-arrow-right"></i></span></a>
                 </div>
               </article>

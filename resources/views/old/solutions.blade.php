@@ -80,7 +80,7 @@
             <h2 class="faq__title">{{ $row->category_name }}</h2>
             {!! $row->description !!}
             <div class="btn-common-wrap">
-              <a href="{{ url($row->category_slug) }}" class="blog__btn mt-4">Explore Now <span><i
+              <a href="{{ url('old/' . $row->category_slug) }}" class="blog__btn mt-4">Explore Now <span><i
                     class="fa-solid fa-arrow-right"></i></span></a>
             </div>
           </div>

@@ -85,7 +85,7 @@
                 $i = 1;
               @endphp
               @foreach ($jobs as $row)
-                <a href="{{ url($row->slug) }}">
+                <a href="{{ url('old/' . $row->slug) }}">
                   <div class="job__item">
                     <p class="job__no">{{ $i }}</p>
                     <h3 class="job__title">{{ $row->designation }}</h3>

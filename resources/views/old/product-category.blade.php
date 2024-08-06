@@ -95,7 +95,7 @@
                 <div class="blog__title">{{ $sc->sub_category_name }}</div>
               </h5>
               <p class="mb-3 text-justify">{{ $sc->shortnote }}</p>
-              <a href="{{ url($sc->sub_category_slug) }}" class="blog__btn">Explore Now <span><i
+              <a href="{{ url('old/' . $sc->sub_category_slug) }}" class="blog__btn">Explore Now <span><i
                     class="fa-solid fa-arrow-right"></i></span></a>
             </article>
           </div>

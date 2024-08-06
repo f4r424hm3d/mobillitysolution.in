@@ -36,7 +36,7 @@
       <span class="woocomerce__footer-title">Category</span>
       <ul class="woocomerce__footer-list">
         @foreach ($categories as $cat)
-          <li><a href="{{ url($cat->category_slug) }}">{{ $cat->category_name }}</a></li>
+          <li><a href="{{ url('old/' . $cat->category_slug) }}">{{ $cat->category_name }}</a></li>
         @endforeach
       </ul>
     </div>
