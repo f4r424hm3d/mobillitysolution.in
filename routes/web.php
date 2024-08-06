@@ -23,13 +23,13 @@ use App\Http\Controllers\admin\ProductSubCategoryFaqC;
 use App\Http\Controllers\admin\TeamC;
 use App\Http\Controllers\admin\UploadFilesC;
 use App\Http\Controllers\CommonController;
-use App\Http\Controllers\front\AboutFc;
-use App\Http\Controllers\front\BlogFc;
-use App\Http\Controllers\front\CareerFc;
-use App\Http\Controllers\front\ContactFc;
-use App\Http\Controllers\front\HomeFc;
-use App\Http\Controllers\front\InquiryController;
-use App\Http\Controllers\front\SolutionFc;
+use App\Http\Controllers\old\AboutFc;
+use App\Http\Controllers\old\BlogFc;
+use App\Http\Controllers\old\CareerFc;
+use App\Http\Controllers\old\ContactFc;
+use App\Http\Controllers\old\HomeFc;
+use App\Http\Controllers\old\InquiryController;
+use App\Http\Controllers\old\SolutionFc;
 use App\Models\Blog;
 use App\Models\JobVacancy;
 use App\Models\Product;
@@ -105,47 +105,50 @@ Route::get('/f/migrate', function () {
 });
 
 /* FRONT ROUTE */
-Route::get('/', [HomeFc::class, 'index']);
-Route::get('team', [HomeFc::class, 'team']);
-Route::get('/what-make-us-different', [HomeFc::class, 'whatMakeUsDifferent']);
-Route::get('/privacy-policy', [HomeFc::class, 'privacyPolicy']);
-Route::get('/about-us', [AboutFc::class, 'index']);
-Route::get('/contact-us', [ContactFc::class, 'index']);
-Route::get('/enquiry', [ContactFc::class, 'enquiry']);
-Route::get('/thank-you', [ContactFc::class, 'thankYou']);
+
+Route::prefix('old')->group(function () {
+  Route::get('/', [HomeFc::class, 'index']);
+  Route::get('team', [HomeFc::class, 'team']);
+  Route::get('/what-make-us-different', [HomeFc::class, 'whatMakeUsDifferent']);
+  Route::get('/privacy-policy', [HomeFc::class, 'privacyPolicy']);
+  Route::get('/about-us', [AboutFc::class, 'index']);
+  Route::get('/contact-us', [ContactFc::class, 'index']);
+  Route::get('/enquiry', [ContactFc::class, 'enquiry']);
+  Route::get('/thank-you', [ContactFc::class, 'thankYou']);
 
 
-Route::get('/career', [CareerFc::class, 'index']);
-$jobs = JobVacancy::all();
-foreach ($jobs as $row) {
-  Route::get('/' . $row->slug, [CareerFc::class, 'jobDetail']);
-}
-Route::post('apply-job', [CareerFc::class, 'applyJob']);
+  Route::get('/career', [CareerFc::class, 'index']);
+  $jobs = JobVacancy::all();
+  foreach ($jobs as $row) {
+    Route::get('/' . $row->slug, [CareerFc::class, 'jobDetail']);
+  }
+  Route::post('apply-job', [CareerFc::class, 'applyJob']);
 
 
-Route::get('/solutions', [SolutionFc::class, 'index']);
-$cat = ProductCategory::all();
-foreach ($cat as $row) {
-  Route::get('/' . $row->category_slug, [SolutionFc::class, 'catDetail']);
-}
-$subcat = ProductSubCategory::all();
-foreach ($subcat as $row) {
-  Route::get('/' . $row->sub_category_slug, [SolutionFc::class, 'subDetail']);
-}
-$prod = Product::all();
-foreach ($prod as $row) {
-  Route::get('/' . $row->product_slug, [SolutionFc::class, 'prodDetail']);
-}
+  Route::get('/solutions', [SolutionFc::class, 'index']);
+  $cat = ProductCategory::all();
+  foreach ($cat as $row) {
+    Route::get('/' . $row->category_slug, [SolutionFc::class, 'catDetail']);
+  }
+  $subcat = ProductSubCategory::all();
+  foreach ($subcat as $row) {
+    Route::get('/' . $row->sub_category_slug, [SolutionFc::class, 'subDetail']);
+  }
+  $prod = Product::all();
+  foreach ($prod as $row) {
+    Route::get('/' . $row->product_slug, [SolutionFc::class, 'prodDetail']);
+  }
 
-Route::get('/news', [BlogFc::class, 'index']);
-Route::get('/news/{slug}', [BlogFc::class, 'blogByCategory']);
-$blogs = Blog::all();
-foreach ($blogs as $row) {
-  Route::get('/' . $row->slug, [BlogFc::class, 'blogdetail']);
-}
+  Route::get('/news', [BlogFc::class, 'index']);
+  Route::get('/news/{slug}', [BlogFc::class, 'blogByCategory']);
+  $blogs = Blog::all();
+  foreach ($blogs as $row) {
+    Route::get('/' . $row->slug, [BlogFc::class, 'blogdetail']);
+  }
 
-Route::post('inquiry/contact-us', [InquiryController::class, 'submitContactUs']);
-Route::post('inquiry/enquiry', [InquiryController::class, 'enquiry']);
+  Route::post('inquiry/contact-us', [InquiryController::class, 'submitContactUs']);
+  Route::post('inquiry/enquiry', [InquiryController::class, 'enquiry']);
+});
 
 
 /* ADMIN ROUTES BEFORE LOGIN */
