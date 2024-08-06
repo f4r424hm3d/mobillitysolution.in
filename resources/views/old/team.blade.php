@@ -9,7 +9,7 @@
     <div class="container">
       <h2>Team</h2>
       <ul>
-        <li><a href="{{ url('/') }}">Home</a></li>
+        <li><a href="{{ url('old') }}">Home</a></li>
         <li>Team</li>
       </ul>
     </div>

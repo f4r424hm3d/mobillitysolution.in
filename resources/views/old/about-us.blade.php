@@ -7,7 +7,7 @@
   <div class="breadcrumb">
     <div class="container">
       <ul class="woocomerce__single-breadcrumb">
-        <li><a href="{{ url('/') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
+        <li><a href="{{ url('old') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
         <li><a href="#">About Mobility <i class="fa-solid fa-chevron-right"></i></a></li>
         <li>About Us</li>
       </ul>
@@ -25,7 +25,7 @@
             <div class="hero__about-info">
               <div class="hero__about-btn">
                 <div class="btn_wrapper">
-                  <a href="{{ url('contact-us') }}" class="wc-btn-primary btn-hover btn-item"><span></span> Let's Talk
+                  <a href="{{ url('old/contact-us') }}" class="wc-btn-primary btn-hover btn-item"><span></span> Let's Talk
                     Us<i class="fa-solid fa-arrow-right"></i></a>
                 </div>
               </div>

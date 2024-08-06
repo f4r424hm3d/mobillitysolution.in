@@ -7,7 +7,7 @@
   <div class="breadcrumb">
     <div class="container">
       <ul class="woocomerce__single-breadcrumb">
-        <li><a href="{{ url('/') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
+        <li><a href="{{ url('old') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
         <li>Contact Us</li>
       </ul>
     </div>
@@ -51,7 +51,7 @@
         </div>
         <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-7">
           <div class="contact__form">
-            <form action="{{ url('inquiry/contact-us') }}" method="post">
+            <form action="{{ url('old/inquiry/contact-us') }}" method="post">
               @csrf
               <input type="hidden" name="source" value="contact-us">
               <input type="hidden" name="source_path" value="{{ URL::full() }}">

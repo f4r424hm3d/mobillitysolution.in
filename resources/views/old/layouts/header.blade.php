@@ -40,9 +40,9 @@
   <header class="header__area-3">
     <div class="header__inner-3">
       <div class="header__logo-2">
-        <a href="{{ url('/') }}" class="logo-dark"><img src="{{ url('web/') }}/assets/imgs/logo/logo-black.png"
+        <a href="{{ url('old') }}" class="logo-dark"><img src="{{ url('web/') }}/assets/imgs/logo/logo-black.png"
             alt="Site Logo"></a>
-        <a href="{{ url('/') }}" class="logo-light"><img src="{{ url('web/') }}/assets/imgs/logo/logo-black.png"
+        <a href="{{ url('old') }}" class="logo-light"><img src="{{ url('web/') }}/assets/imgs/logo/logo-black.png"
             alt="Site Logo"></a>
       </div>
       <div class="header__nav-2"></div>
@@ -59,7 +59,7 @@
     <div class="offcanvas__body">
       <div class="offcanvas__left">
         <div class="offcanvas__logo">
-          <a href="{{ url('/') }}"><img src="{{ url('web/') }}/assets/imgs/logo/logo-black.png"
+          <a href="{{ url('old') }}"><img src="{{ url('web/') }}/assets/imgs/logo/logo-black.png"
               alt="Logo"></a>
         </div>
         <div class="offcanvas__social">
@@ -76,14 +76,14 @@
         <div class="offcanvas__menu-wrapper">
           <nav class="offcanvas__menu">
             <ul class="menu-anim">
-              <li><a href="{{ url('/') }}">Home</a></li>
+              <li><a href="{{ url('old') }}">Home</a></li>
               <li><a href="#">About Mobility</a>
                 <ul>
-                  <li><a href="{{ url('about-us') }}">About us</a></li>
-                  <li><a href="{{ url('what-make-us-different') }}">What make us different</a></li>
+                  <li><a href="{{ url('old/about-us') }}">About us</a></li>
+                  <li><a href="{{ url('old/what-make-us-different') }}">What make us different</a></li>
                 </ul>
               </li>
-              <li><a href="{{ url('solutions') }}">Solutions</a>
+              <li><a href="{{ url('old/solutions') }}">Solutions</a>
                 <ul>
                   @foreach ($categories as $cat)
                     <li><a href="{{ url($cat->category_slug) }}">{{ $cat->category_name }}</a>
@@ -96,10 +96,10 @@
                   @endforeach
                 </ul>
               </li>
-              <li><a href="{{ url('career') }}">Career</a></li>
+              <li><a href="{{ url('old/career') }}">Career</a></li>
               <li><a href="{{ url('news') }}">Blog</a></li>
               <li><a href="{{ url('enquiry') }}">Enquiry</a></li>
-              <li><a href="{{ url('contact-us') }}">Contact</a></li>
+              <li><a href="{{ url('old/contact-us') }}">Contact</a></li>
             </ul>
           </nav>
         </div>

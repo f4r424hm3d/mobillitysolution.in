@@ -8,7 +8,7 @@
           <h2 class="cta__title mb-3">"Don't focus on the Disability,<br>Focus on the Ability"</h2>
           <p>“While we’re good with signals, there are simpler ways for us to get in touch and answer your
             questions.”</p>
-          <div class="btn_wrapper"><a href="{{ url('contact-us') }}"
+          <div class="btn_wrapper"><a href="{{ url('old/contact-us') }}"
               class="wc-btn-primary btn-item btn-hover"><span></span>Let’s talk
               us <i class="fa-solid fa-arrow-right"></i></a></div>
         </div>

@@ -7,7 +7,7 @@
   <div class="breadcrumb">
     <div class="container">
       <ul class="woocomerce__single-breadcrumb">
-        <li><a href="{{ url('/') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
+        <li><a href="{{ url('old') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
         <li><a href="#">About Mobility <i class="fa-solid fa-chevron-right"></i></a></li>
         <li>What make us different</li>
       </ul>

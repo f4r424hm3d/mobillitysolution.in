@@ -84,8 +84,8 @@
   <div class="breadcrumb">
     <div class="container">
       <ul class="woocomerce__single-breadcrumb">
-        <li><a href="{{ url('/') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
-        <li><a href="{{ url('solutions') }}">Solutions <i class="fa-solid fa-chevron-right"></i></a></li>
+        <li><a href="{{ url('old') }}">Home <i class="fa-solid fa-chevron-right"></i></a></li>
+        <li><a href="{{ url('old/solutions') }}">Solutions <i class="fa-solid fa-chevron-right"></i></a></li>
         <li><a href="{{ url($row->getCategory->category_slug) }}">{{ $row->getCategory->category_name }} <i
               class="fa-solid fa-chevron-right"></i></a></li>
         <li>{{ $row->sub_category_name }}</li>

@@ -9,7 +9,7 @@
     <div class="container">
       <h2>Thank You</h2>
       <ul>
-        <li><a href="{{ url('/') }}">Home</a></li>
+        <li><a href="{{ url('old') }}">Home</a></li>
         <li>Thank You</li>
       </ul>
     </div>

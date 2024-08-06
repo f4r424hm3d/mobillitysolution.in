@@ -3,7 +3,7 @@
   $page_url = url()->current();
   $url = Request::segment(1) ?? 'home';
   $seo = StaticPageSeo::where(['url' => $url])->first();
-  $site = url('/');
+  $site = url('old');
   $tagArray = ['currentmonth' => date('M'), 'currentyear' => date('Y'), 'site' => $site];
 
   $meta_title = $seo->meta_title ?? '';
