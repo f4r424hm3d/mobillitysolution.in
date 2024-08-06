@@ -106,12 +106,10 @@ Route::get('/f/migrate', function () {
 
 /* FRONT ROUTE */
 
-Route::get('/', function () {
-  return redirect('old');
-});
 
 
-Route::prefix('old')->group(function () {
+
+Route::prefix('old/')->group(function () {
   Route::get('/', [HomeFc::class, 'index']);
   Route::get('team', [HomeFc::class, 'team']);
   Route::get('/what-make-us-different', [HomeFc::class, 'whatMakeUsDifferent']);
