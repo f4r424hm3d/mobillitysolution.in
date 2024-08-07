@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
   use HasFactory;
-  protected $primaryKey = "id";
-  protected $table = "countries";
+
+  public function scopePhonecodes($query)
+  {
+    return $query->orderBy('phonecode', 'asc');
+  }
 }

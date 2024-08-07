@@ -3,31 +3,31 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductCategory;
-use App\Models\ProductCategoryFaq;
+use App\Models\Product;
+use App\Models\ProductFaq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ProductCategoryFaqC extends Controller
+class ProductFaqC extends Controller
 {
   protected $page_route;
   public function __construct()
   {
-    $this->page_route = 'category-faqs';
+    $this->page_route = 'product-faqs';
   }
-  public function index(Request $request, $category_id, $id = null)
+  public function index(Request $request, $product_id, $id = null)
   {
-    $productCategory = ProductCategory::find($category_id);
+    $product = Product::find($product_id);
     $page_no = $_GET['page'] ?? 1;
-    $rows = ProductCategoryFaq::where('category_id', $category_id)->get();
+    $rows = ProductFaq::where('product_id', $product_id)->get();
     if ($id != null) {
-      $sd = ProductCategoryFaq::find($id);
+      $sd = ProductFaq::find($id);
       if (!is_null($sd)) {
         $ft = 'edit';
-        $url = url('admin/' . $this->page_route . '/' . $category_id . '/update/' . $id);
+        $url = url('admin/' . $this->page_route . '/' . $product_id . '/update/' . $id);
         $title = 'Update';
       } else {
-        return redirect('admin/' . $this->page_route . '/' . $category_id);
+        return redirect('admin/' . $this->page_route . '/' . $product_id);
       }
     } else {
       $ft = 'add';
@@ -35,15 +35,15 @@ class ProductCategoryFaqC extends Controller
       $title = 'Add New';
       $sd = '';
     }
-    $page_title = "Category FAQs";
+    $page_title = "Product FAQs";
     $page_route = $this->page_route;
-    $data = compact('rows', 'sd', 'ft', 'title', 'page_title', 'page_route', 'page_no', 'url', 'category_id', 'productCategory');
-    return view('admin.category-faqs')->with($data);
+    $data = compact('rows', 'sd', 'ft', 'title', 'page_title', 'page_route', 'page_no', 'url', 'product_id', 'product');
+    return view('admin.product-faqs')->with($data);
   }
   public function storeAjax(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'category_id' => 'required',
+      'product_id' => 'required',
       'question' => 'required',
       'answer' => 'required',
     ]);
@@ -54,8 +54,8 @@ class ProductCategoryFaqC extends Controller
       ]);
     }
 
-    $field = new ProductCategoryFaq;
-    $field->category_id = $request['category_id'];
+    $field = new ProductFaq;
+    $field->product_id = $request['product_id'];
     $field->question = $request['question'];
     $field->answer = $request['answer'];
     $field->save();
@@ -64,35 +64,35 @@ class ProductCategoryFaqC extends Controller
   public function delete($id)
   {
     if ($id) {
-      $row = ProductCategoryFaq::findOrFail($id);
+      $row = ProductFaq::findOrFail($id);
       //   if ($row->thumbnail_path != null) {
       //     unlink($row->thumbnail_path);
       //   }
       echo $result = $row->delete();
     }
   }
-  public function update($category_id, $id, Request $request)
+  public function update($product_id, $id, Request $request)
   {
     $request->validate(
       [
-        'category_id' => 'required',
+        'product_id' => 'required',
         'question' => 'required',
         'answer' => 'required',
       ]
     );
-    $field = ProductCategoryFaq::find($id);
-    $field->category_id = $request['category_id'];
+    $field = ProductFaq::find($id);
+    $field->product_id = $request['product_id'];
     $field->question = $request['question'];
     $field->answer = $request['answer'];
     $field->save();
     session()->flash('smsg', 'Record has been updated successfully.');
-    return redirect('admin/' . $this->page_route . '/' . $category_id);
+    return redirect('admin/' . $this->page_route . '/' . $product_id);
   }
   public function getData(Request $request)
   {
     // return $request;
     // die;
-    $rows = ProductCategoryFaq::where('category_id', $request->category_id)->paginate(10)->withPath('/admin/' . $this->page_route . '/' . $request->category_id);
+    $rows = ProductFaq::where('product_id', $request->product_id)->paginate(10)->withPath('/admin/' . $this->page_route . '/' . $request->product_id);
     $i = 1;
     $output = '<table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
     <thead>
@@ -135,7 +135,7 @@ class ProductCategoryFaqC extends Controller
               <a href="javascript:void()" onclick="DeleteAjax(' . $row->id . ')"
                 class="waves-effect waves-light btn btn-xs btn-outline btn-danger"><i class="fa fa-trash"
                   aria-hidden="true"></i></a>
-              <a href="' . url('admin/' . $this->page_route . '/' . $request->category_id . '/update/' . $row->id) . '" class="waves-effect waves-light btn btn-xs btn-outline btn-info"><i
+              <a href="' . url('admin/' . $this->page_route . '/' . $request->product_id . '/update/' . $row->id) . '" class="waves-effect waves-light btn btn-xs btn-outline btn-info"><i
                   class="fa fa-edit" aria-hidden="true"></i></a>
             </td>
           </tr>';

@@ -58,7 +58,7 @@ class ProductSubCategoryC extends Controller
         $output .= '<tr id="row' . $row->id . '">
       <td>' . $i . '</td>
       <td>' . $row->sub_category_name . '</td>
-      <td>' . $row->getCategory->category_name . '</td>
+      <td>' . $row->category->category_name . '</td>
       <td>';
 
         if ($row->thumbnail_path != null) {

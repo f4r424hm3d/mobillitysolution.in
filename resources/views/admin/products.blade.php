@@ -135,7 +135,7 @@
                           @foreach ($filterCategories as $row)
                             <option value="{{ $row->category_id }}"
                               {{ isset($_GET['category']) && $_GET['category'] == $row->category_id ? 'selected' : '' }}>
-                              {{ $row->getCategory->category_name }}</option>
+                              {{ $row->category->category_name }}</option>
                           @endforeach
                         </select>
                       </div>
@@ -148,7 +148,7 @@
                           @foreach ($filterSubCategories as $row)
                             <option value="{{ $row->sub_category_id }}"
                               {{ isset($_GET['sub_category']) && $_GET['sub_category'] == $row->sub_category_id ? 'selected' : '' }}>
-                              {{ $row->getSubCategory->sub_category_name }}</option>
+                              {{ $row->subCategory->sub_category_name }}</option>
                           @endforeach
                         </select>
                       </div>
@@ -218,8 +218,8 @@
                       <td>{{ $i }}</td>
                       <td>{{ $row->product_name }}</td>
                       <td>
-                        <b>Category</b> : {{ $row->getCategory->category_name }}<br>
-                        <b>Sub Category</b> : {{ $row->getSubCategory->sub_category_name }}
+                        <b>Category</b> : {{ $row->category->category_name }}<br>
+                        <b>Sub Category</b> : {{ $row->subCategory->sub_category_name }}
                       </td>
                       <td>
                         @if ($row->thumbnail_path != null)
@@ -309,6 +309,10 @@
                         <a href="{{ url('admin/product-gallery/' . $row->id) }}"
                           class="waves-effect waves-light btn btn-xs btn-outline-info">
                           Gallery <span class="badge bg-primary">{{ $row->photos->count() }}</span>
+                        </a>
+                        <a href="{{ url('admin/product-faqs/' . $row->id) }}"
+                          class="waves-effect waves-light btn btn-xs btn-outline-info">
+                          Faqs <span class="badge bg-primary">{{ $row->faqs->count() }}</span>
                         </a>
                       </td>
                     </tr>

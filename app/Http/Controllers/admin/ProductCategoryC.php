@@ -214,7 +214,7 @@ class ProductCategoryC extends Controller
       $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
       $move = $request->file('thumbnail_name')->move('uploads/products/', $file_name);
       if ($move) {
-        if ($field->thumbnail_path != null) {
+        if ($field->thumbnail_path != null && file_exists($field->thumbnail_path)) {
           unlink($field->thumbnail_path);
         }
         $field->thumbnail_name = $file_name;

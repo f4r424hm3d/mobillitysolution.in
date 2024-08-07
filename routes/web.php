@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\ProductSubCategoryC;
 use App\Http\Controllers\admin\StaticPageSeoC;
 use App\Http\Controllers\admin\UserC;
 use App\Http\Controllers\admin\ProductCategoryFaqC;
+use App\Http\Controllers\admin\ProductFaqC;
 use App\Http\Controllers\admin\ProductGalleryC;
 use App\Http\Controllers\admin\ProductSubCategoryFaqC;
 use App\Http\Controllers\admin\TeamC;
@@ -123,19 +124,7 @@ Route::post('/career/apply', [CareerFc::class, 'apply']);
 
 Route::get('/thank-you', [ThankYou::class, 'index']);
 
-Route::get('/solutions', [SolutionFc::class, 'index']);
-$cat = ProductCategory::all();
-foreach ($cat as $row) {
-  Route::get('/' . $row->category_slug, [SolutionFc::class, 'catDetail']);
-}
-$subcat = ProductSubCategory::all();
-foreach ($subcat as $row) {
-  Route::get('/' . $row->sub_category_slug, [SolutionFc::class, 'subDetail']);
-}
-$prod = Product::all();
-foreach ($prod as $row) {
-  Route::get('/' . $row->product_slug, [SolutionFc::class, 'prodDetail']);
-}
+
 
 Route::get('/articles', [BlogFc::class, 'index']);
 Route::get('/articles/{slug}', [BlogFc::class, 'blogByCategory']);
@@ -233,6 +222,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::get('/{product_id}/', [ProductGalleryC::class, 'index']);
       Route::get('{product_id}/update/{id}', [ProductGalleryC::class, 'index']);
       Route::post('{product_id}/update/{id}', [ProductGalleryC::class, 'update']);
+    });
+    Route::prefix('/product-faqs/')->group(function () {
+      Route::get('/get-data', [ProductFaqC::class, 'getData']);
+      Route::get('/delete/{id}', [ProductFaqC::class, 'delete']);
+      Route::post('/store-ajax', [ProductFaqC::class, 'storeAjax']);
+      Route::get('/{product_id}/', [ProductFaqC::class, 'index']);
+      Route::get('{product_id}/update/{id}', [ProductFaqC::class, 'index']);
+      Route::post('{product_id}/update/{id}', [ProductFaqC::class, 'update']);
     });
     Route::prefix('/authors')->group(function () {
       Route::get('', [AuthorC::class, 'index']);
@@ -345,3 +342,12 @@ Route::prefix('common')->group(function () {
 
   Route::get('/get-sub-category-by-category', [CommonController::class, 'getSubCategoryByCategory']);
 });
+
+Route::get('/solutions', [SolutionFc::class, 'index']);
+
+$cat = ProductCategory::all();
+foreach ($cat as $row) {
+  Route::get($row->category_slug, [SolutionFc::class, 'catDetail']);
+  Route::get($row->category_slug . '/{sub_category_slug}', [SolutionFc::class, 'subDetail']);
+  Route::get($row->category_slug . '/{sub_category_slug}/{product_slug}', [SolutionFc::class, 'prodDetail']);
+}

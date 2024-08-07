@@ -8,15 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class ProductSubCategory extends Model
 {
   use HasFactory;
-  public function getCategory()
+  public function category()
   {
     return $this->hasOne(ProductCategory::class, 'id', 'category_id');
   }
-  public function getAllProduct()
+  public function products()
   {
     return $this->hasMany(Product::class, 'sub_category_id', 'id');
   }
-  public function getFaqs()
+  public function faqs()
   {
     return $this->hasMany(ProductSubCategoryFaq::class, 'sub_category_id', 'id');
   }

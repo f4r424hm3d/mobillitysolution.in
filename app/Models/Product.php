@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
   use HasFactory;
-  public function getCategory()
+  public function category()
   {
     return $this->hasOne(ProductCategory::class, 'id', 'category_id');
   }
-  public function getSubCategory()
+  public function subCategory()
   {
     return $this->hasOne(ProductSubCategory::class, 'id', 'sub_category_id');
   }
@@ -23,5 +23,9 @@ class Product extends Model
   public function photos()
   {
     return $this->hasMany(ProductGallery::class, 'product_id', 'id');
+  }
+  public function faqs()
+  {
+    return $this->hasMany(ProductFaq::class, 'product_id', 'id');
   }
 }

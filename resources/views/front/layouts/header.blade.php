@@ -1,3 +1,8 @@
+@php
+  use App\Models\ProductCategory;
+
+  $menuProductCategories = ProductCategory::all();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -78,12 +83,29 @@
                 <li class="login_click light"><a href="{{ url('/student/profile/') }}">Profile</a></li>
               @else
                 <li class="login_click light"><a href="{{ url('/') }}/sign-in">Login</a></li>
-                <!--<li class="login_click theme-bg"><a href="{{ url('/') }}/sign-up">Sign up</a></li>-->
               @endif
             </ul>
             <ul class="nav-menu align-to-right">
+              @foreach ($menuProductCategories as $row)
+                <li class="mega-dropdown">
+                  <a href="{{ url($row->category_slug) }}">{{ $row->category_name }}<span
+                      class="submenu-indicator"></span></a>
+                  <ul class="nav-dropdown nav-submenu mega-dropdown-menu">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <ul>
+                          @foreach ($row->getAllSubCategory as $sc)
+                            <li><a href="{{ url($sc->sub_category_slug) }}"><i class="ti-arrow-right"></i>
+                                {{ $sc->sub_category_name }}</a></li>
+                          @endforeach
+                        </ul>
+                      </div>
+                    </div>
+                  </ul>
+                </li>
+              @endforeach
               <li><a href="{{ url('career') }}">Career</a></li>
-              <li><a href="{{ url('news') }}/#">Blog</a></li>
+              <li><a href="{{ url('articles') }}">Blog</a></li>
               <li><a href="{{ url('enquiry') }}">Enquiry</a></li>
               <li><a href="{{ url('contact-us') }}">Contact</a></li>
             </ul>
