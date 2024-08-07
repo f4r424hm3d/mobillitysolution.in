@@ -140,6 +140,40 @@
               <a href="{{ url('enquiry') }}" class="big-center-btn btn-theme text-white rounded">
                 Enquiry Now</a>
 
+              <!-- Photo Gallery -->
+              @if ($pageDetail->photos->count() > 0)
+                <div class="card" id="photogallery">
+                  <div id="headingThree" class="card-header bg-white shadow-sm border-0 pl-4 pr-4">
+                    <h6 class="mb-0 accordion_title"><a href="#" data-toggle="collapse" data-target="#collapseThree"
+                        aria-expanded="true" aria-controls="collapseThree"
+                        class="d-block position-relative collapsed text-dark collapsible-link py-2">Other Photos</a>
+                    </h6>
+                  </div>
+                  <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample"
+                    class="collapse show">
+                    <div class="card-body pl-4 pr-4 pb-0">
+                      <div class="row">
+
+                        @foreach ($pageDetail->photos as $g)
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-6">
+                            <div class="course_overlay_cat">
+                              <div class="course_overlay_cat_thumb">
+                                <a href="{{ asset($g->file_path) }}" class="fancybox" data-fancybox="gallery"
+                                  data-caption="Image title type here">
+                                  <img data-src="{{ asset($g->file_path) }}" class="img-fluid"
+                                    alt="{{ $g->title }}">
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        @endforeach
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endif
+
               @if ($pageDetail->contents->count() > 0)
                 <div id="accordionExample" class="accordion circullum">
                   <div class="card mt-4 mb-4 shadow-0">
