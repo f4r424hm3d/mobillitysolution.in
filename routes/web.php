@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\BlogC;
 use App\Http\Controllers\admin\BlogCategoryC;
 use App\Http\Controllers\admin\DefaultOgImageC;
 use App\Http\Controllers\admin\DynamicPageSeoC;
+use App\Http\Controllers\admin\EmployeeC;
 use App\Http\Controllers\admin\EmployeeStatusC;
 use App\Http\Controllers\admin\HomePageBannerC;
 use App\Http\Controllers\admin\JobApplicationC;
@@ -33,6 +34,7 @@ use App\Http\Controllers\front\ContactFc;
 use App\Http\Controllers\front\HomeFc;
 use App\Http\Controllers\front\InquiryController;
 use App\Http\Controllers\front\SolutionFc;
+use App\Http\Controllers\front\TeamFc;
 use App\Http\Controllers\front\ThankYou;
 use App\Models\Blog;
 use App\Models\JobVacancy;
@@ -112,7 +114,7 @@ Route::get('/f/migrate', function () {
 Route::get('/', [HomeFc::class, 'index']);
 Route::get('/about-us', [AboutFc::class, 'index']);
 Route::get('/what-make-us-different', [AboutFc::class, 'whatMakeUsDifferent']);
-Route::get('team', [HomeFc::class, 'team']);
+//Route::get('team', [HomeFc::class, 'team']);
 Route::get('/privacy-policy', [HomeFc::class, 'privacyPolicy']);
 Route::get('/contact-us', [ContactFc::class, 'index']);
 Route::post('/contact', [ContactFc::class, 'submitInquiry']);
@@ -121,6 +123,8 @@ Route::post('/enquiry', [InquiryController::class, 'store']);
 Route::get('/career', [CareerFc::class, 'index']);
 Route::post('/career/apply', [CareerFc::class, 'apply']);
 
+Route::get('team', [TeamFc::class, 'team']);
+Route::get('team/{slug}', [TeamFc::class, 'userDetail']);
 
 Route::get('/thank-you', [ThankYou::class, 'index']);
 
@@ -318,6 +322,14 @@ Route::middleware(['adminLoggedIn'])->group(function () {
       Route::get('/delete/{id}', [UserC::class, 'delete']);
       Route::get('/update/{id}', [UserC::class, 'index']);
       Route::post('/update/{id}', [UserC::class, 'update']);
+    });
+    Route::prefix('/employees')->group(function () {
+      Route::get('', [EmployeeC::class, 'index']);
+      Route::post('/store', [EmployeeC::class, 'store']);
+      Route::get('/get-data', [EmployeeC::class, 'getData']);
+      Route::get('/delete/{id}', [EmployeeC::class, 'delete']);
+      Route::get('/update/{id}', [EmployeeC::class, 'index']);
+      Route::post('/update/{id}', [EmployeeC::class, 'update']);
     });
     Route::prefix('/employee-statuses')->group(function () {
       Route::get('', [EmployeeStatusC::class, 'index']);

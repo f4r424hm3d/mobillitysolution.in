@@ -95,7 +95,8 @@
                       <div class="col-md-4">
                         <ul>
                           @foreach ($row->getAllSubCategory as $sc)
-                            <li><a href="{{ url($sc->sub_category_slug) }}"><i class="ti-arrow-right"></i>
+                            <li><a href="{{ url($row->category_slug . '/' . $sc->sub_category_slug) }}"><i
+                                  class="ti-arrow-right"></i>
                                 {{ $sc->sub_category_name }}</a></li>
                           @endforeach
                         </ul>

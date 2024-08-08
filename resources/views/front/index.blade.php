@@ -216,7 +216,7 @@
                 <li><span class="theme-cl1">800+</span>Applications Made</li>
               </ul>
             </div>
-            <a href="about" class="btn btn-modern float-left">Know More<span><i
+            <a href="{{ url('about-us') }}" class="btn btn-modern float-left">Know More<span><i
                   class="ti-arrow-right"></i></span></a>
           </div>
         </div>
@@ -234,7 +234,7 @@
 
       <div class="row mb-2">
         <div class="col-lg-12 col-sm-12 text-center">
-          <h2>Britannica <span class="theme-cl1">Services & </span> Offerings</h2>
+          <h2>Mobility Solution <span class="theme-cl1">Services & </span> Offerings</h2>
         </div>
       </div>
 
@@ -315,7 +315,7 @@
               <span class="list_facts">
                 <span class="list_facts_icons"><i class="ti-star"></i></span>
                 <span class="list_facts_caption">
-                  <h4>Access to Britannica's extensive Knowledge Repository</h4>
+                  <h4>Access to Mobility Solution's extensive Knowledge Repository</h4>
                 </span>
               </span>
 
@@ -354,7 +354,7 @@
               <span class="list_facts">
                 <span class="list_facts_icons"><i class="ti-star"></i></span>
                 <span class="list_facts_caption">
-                  <h4>Access to Britannica's rich Knowledge Repository</h4>
+                  <h4>Access to Mobility Solution's rich Knowledge Repository</h4>
                 </span>
               </span>
 
@@ -399,7 +399,7 @@
               <span class="list_facts">
                 <span class="list_facts_icons"><i class="ti-star"></i></span>
                 <span class="list_facts_caption">
-                  <h4>Leverage Britannica's vast recruitment network</h4>
+                  <h4>Leverage Mobility Solution's vast recruitment network</h4>
                 </span>
               </span>
 
@@ -426,7 +426,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-12 col-md-12 mb-3">
           <div class="sec-heading center">
-            <h2>Study <span class="theme-cl1">Abroad Exams</span> with Britannica</h2>
+            <h2>Study <span class="theme-cl1">Abroad Exams</span> with Mobility Solution</h2>
           </div>
         </div>
       </div>

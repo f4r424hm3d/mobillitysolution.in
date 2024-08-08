@@ -157,7 +157,8 @@
                       <span class="list_facts_caption">
                         <h4>Webinars for Ongoing Learning </h4>
                         <p>Stay updated and ahead of industry trends through our weekly e-learning webinars. Presented by
-                          university delegates and experts from Britannica, these interactive sessions provide invaluable
+                          university delegates and experts from Mobility Solution, these interactive sessions provide
+                          invaluable
                           insights, ensuring counselors and advisors are well-versed in international education.</p>
                       </span>
                     </span>
@@ -179,7 +180,8 @@
                       <span class="list_facts_caption">
                         <h4>Conversion Sessions for Personalized Guidance</h4>
                         <p>We value the significance of fostering direct interactions between students and universities.
-                          Our Conversion Sessions, skillfully conducted by the Britannica team, offer a distinct platform
+                          Our Conversion Sessions, skillfully conducted by the Mobility Solution team, offer a distinct
+                          platform
                           for your students to engage with university representatives. These sessions play a vital role in
                           guiding students toward the most suitable institutions, ensuring a seamless transition into
                           their international education expedition</p>
@@ -381,7 +383,7 @@
 
       <div class="row mb-2">
         <div class="col-lg-12 col-sm-12 text-center service-heading-pb">
-          <h2>Britannica <span class="theme-cl1">Services & </span> Offerings</h2>
+          <h2>Mobility Solution <span class="theme-cl1">Services & </span> Offerings</h2>
         </div>
       </div>
 
@@ -464,7 +466,7 @@
               <span class="list_facts">
                 <span class="list_facts_icons"><i class="ti-star"></i></span>
                 <span class="list_facts_caption">
-                  <h4>Access to Britannica's rich Knowledge Repository</h4>
+                  <h4>Access to Mobility Solution's rich Knowledge Repository</h4>
                 </span>
               </span>
 
@@ -497,7 +499,7 @@
               <span class="list_facts">
                 <span class="list_facts_icons"><i class="ti-star"></i></span>
                 <span class="list_facts_caption">
-                  <h4>Leverage Britannica's vast recruitment network</h4>
+                  <h4>Leverage Mobility Solution's vast recruitment network</h4>
                 </span>
               </span>
 

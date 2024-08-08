@@ -15,7 +15,7 @@
               <li class="facts-1"><a href="#">Contact</a></li>
             </ul>
             <div class="ed_header_caption mb-0">
-              <h1 class="ed_title mb-0">Contact Britannica</h1>
+              <h1 class="ed_title mb-0">Contact Mobility Solution</h1>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
             </div>
             <div class="prc_wrap-body">
               <div class="contact-info">
-                <p>We at Britannica Education have not only been taking care of students but also understand their needs.
+                <p>We at Mobility Solution have not only been taking care of students but also understand their needs.
                   We consult the students as well as their family to take the right decision for a bright and happy
                   future.</p>
 

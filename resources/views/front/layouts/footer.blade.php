@@ -84,7 +84,7 @@
           <div class="footer-widget">
             <span class="widget-title">Other Links</span>
             <ul class="footer-menu">
-              <li><a href="{{ url('about') }}"><i class="ti-arrow-right"></i> ABOUT BRITANNICA</a></li>
+              <li><a href="{{ url('about-us') }}"><i class="ti-arrow-right"></i> ABOUT BRITANNICA</a></li>
               <li><a href="{{ url('contact') }}"><i class="ti-arrow-right"></i> CONTACT US</a></li>
               <li><a href="{{ url('team') }}"><i class="ti-arrow-right"></i> Our Team</a></li>
               <li><a href="{{ url('/career') }}"><i class="ti-arrow-right"></i> CAREER</a></li>

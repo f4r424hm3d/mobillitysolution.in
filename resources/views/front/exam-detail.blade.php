@@ -57,7 +57,7 @@
       "dateModified": "<?= getISOFormatTime($examtab->updated_at) ?>",
       "datePublished": "<?= getISOFormatTime($examtab->created_at) ?>",
       "mainEntityOfPage": { "id": "<?= $page_url ?>", "@type": "WebPage" },
-      "author": { "@type": "Person", "name": "Britannica Team", "url": "https://www.britannicaoverseas.com/author/6-britannica-team" },
+      "author": { "@type": "Person", "name": "Mobility Solution Team", "url": "https://www.britannicaoverseas.com/author/6-britannica-team" },
       "publisher": {
           "@type": "Organization",
           "name": "Mobility Solution",

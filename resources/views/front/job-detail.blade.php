@@ -437,7 +437,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-12 col-md-12 mb-3">
             <div class="sec-heading center">
-              <h2>Study <span class="theme-cl">Abroad Exams</span> with Britannica</h2>
+              <h2>Study <span class="theme-cl">Abroad Exams</span> with Mobility Solution</h2>
             </div>
           </div>
         </div>

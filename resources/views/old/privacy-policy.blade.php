@@ -33,7 +33,7 @@
         <h2>How information is collected?</h2>
         <p>The information may be collected via our website by any technology used on our website for example the
           contact us form or a Quote request form. We may also collect personal information via telephone, letter,
-          promotional materials or at any function or event when meeting with a Britannica Bots Intelligence
+          promotional materials or at any function or event when meeting with a Mobility Solution Bots Intelligence
           representative.</p>
 
         <h2>Why collect information?</h2>

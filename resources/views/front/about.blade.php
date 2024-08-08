@@ -15,7 +15,7 @@
               <li class="facts-1">About</li>
             </ul>
             <div class="ed_header_caption mb-0">
-              <h1 class="ed_title mb-0">About Britannica</h1>
+              <h1 class="ed_title mb-0">About Mobility Solution</h1>
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-6 col-md-6 col-sm-12">
           <div class="sec-heading center">
-            <h2><span class="theme-cl1">Get To</span> Know About Britannica</h2>
+            <h2><span class="theme-cl1">Get To</span> Know About Mobility Solution</h2>
 
           </div>
         </div>

@@ -52,7 +52,7 @@
       "dateModified": "<?= getISOFormatTime($schema->updated_at) ?>",
       "datePublished": "<?= getISOFormatTime($schema->created_at) ?>",
       "mainEntityOfPage": { "id": "<?= $page_url ?>", "@type": "WebPage" },
-      "author": { "@type": "Person", "name": "Britannica Team", "url": "https://www.britannicaoverseas.com/author/6-britannica-team" },
+      "author": { "@type": "Person", "name": "Mobility Solution Team", "url": "https://www.britannicaoverseas.com/author/6-britannica-team" },
       "publisher": {
           "@type": "Organization",
           "name": "Tutelage Study",
@@ -228,17 +228,12 @@
                 </div>
               </div>
               <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7656139191073608"
-     crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     data-ad-client="ca-pub-7656139191073608"
-     data-ad-slot="6382306212"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script><br>
-              
+                crossorigin="anonymous"></script>
+              <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article"
+                data-ad-format="fluid" data-ad-client="ca-pub-7656139191073608" data-ad-slot="6382306212"></ins>
+              <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              </script><br>
             @endif
             <!-- Top Trending Universities -->
             @if ($trendingUniversity->count() > 0)
@@ -328,19 +323,16 @@
                   </div>
                 </div>
               </div>
-            @endforeach<br>
+            @endforeach
+            <br>
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7656139191073608"
-     crossorigin="anonymous"></script>
-<!-- ads-1 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7656139191073608"
-     data-ad-slot="2084450086"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+              crossorigin="anonymous"></script>
+            <!-- ads-1 -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7656139191073608"
+              data-ad-slot="2084450086" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
           </div>
         </div>
       </div>

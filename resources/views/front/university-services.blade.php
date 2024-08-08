@@ -166,7 +166,7 @@
 
       <div class="row mb-2">
         <div class="col-lg-12 col-sm-12 text-center service-heading-pb">
-          <h2>Britannica <span class="theme-cl1">Services & </span> Offerings</h2>
+          <h2>Mobility Solution <span class="theme-cl1">Services & </span> Offerings</h2>
         </div>
       </div>
 
@@ -249,7 +249,7 @@
               <span class="list_facts">
                 <span class="list_facts_icons"><i class="ti-star"></i></span>
                 <span class="list_facts_caption">
-                  <h4>Access to Britannica's extensive Knowledge Repository</h4>
+                  <h4>Access to Mobility Solution's extensive Knowledge Repository</h4>
                 </span>
               </span>
 
@@ -289,7 +289,7 @@
               <span class="list_facts">
                 <span class="list_facts_icons"><i class="ti-star"></i></span>
                 <span class="list_facts_caption">
-                  <h4>Access to Britannica's rich Knowledge Repository</h4>
+                  <h4>Access to Mobility Solution's rich Knowledge Repository</h4>
                 </span>
               </span>
 
